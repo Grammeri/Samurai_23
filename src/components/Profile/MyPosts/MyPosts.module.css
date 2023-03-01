@@ -1,4 +1,22 @@
+.myPosts {
+  padding-left: 20px;
+}
 
+.textareaAndBtn {
+  display: flex;
+  padding-right: 5px;
+}
 
+button {
+  height: 35px;
+  background-color: darkgreen;
+  margin-left: 15px;
+  color: white;
+}
+h2 {
+  color: darkgreen;
+}
 
-
+.textarea {
+  margin-bottom: 20px;
+}
