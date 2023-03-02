@@ -2,13 +2,23 @@ import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
 
-export const MyPosts = () => {
-  let postsData = [
+export type MyPostsType = {
+  id:number
+  message:string
+  likesCount: number
+
+}
+export type PostsDataType ={
+  postsData:Array<MyPostsType>
+}
+
+export const MyPosts: React.FC<PostsDataType> = (props) => {
+/*  let postsData = [
     { id: 1, message: "How are you?", likesCount: 15 },
     { id: 2, message: "I am good!", likesCount: 20 },
-  ];
+  ];*/
 
-  let postsElements = postsData.map(el=> <Post message={el.message} likeCount={el.likesCount} />)
+  let postsElements = props.postsData.map(el=> <Post message={el.message} likeCount={el.likesCount} />)
 
   return (
     <div className={style.myPosts}>
