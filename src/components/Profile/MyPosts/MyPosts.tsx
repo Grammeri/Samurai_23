@@ -1,24 +1,19 @@
 import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
+import {ProfilePageType} from "../../../Redux/state";
 
-export type MyPostsType = {
-  id:number
-  message:string
-  likesCount: number
-
-}
-export type PostsDataType ={
-  postsData:Array<MyPostsType>
+export type MyPostsType ={
+  profilePage:ProfilePageType
 }
 
-export const MyPosts: React.FC<PostsDataType> = (props) => {
+export const MyPosts: React.FC<MyPostsType> = (props) => {
 /*  let postsData = [
     { id: 1, message: "How are you?", likesCount: 15 },
     { id: 2, message: "I am good!", likesCount: 20 },
   ];*/
 
-  let postsElements = props.postsData.map(el=> <Post message={el.message} likeCount={el.likesCount} />)
+  let postsElements = props.profilePage.postsData.map(el=> <Post message={el.message} likesCount={el.likesCount} />)
 
   return (
     <div className={style.myPosts}>

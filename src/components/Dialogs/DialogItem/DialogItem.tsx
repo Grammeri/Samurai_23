@@ -1,6 +1,7 @@
 import React from "react";
-import style from "./../Dialogs.module.css";
+import style from "./DialogItem.module.css";
 import { NavLink } from "react-router-dom";
+import Cheburashka from "../../../assets/Cheburashka.jpg";
 
 type DialogsItemType = {
   name: string;
@@ -11,9 +12,10 @@ export const DialogItem = (props: DialogsItemType) => {
   let path = "/dialogs/" + props.id;
 
   return (
-    <div>
+    <div className={style.dialogsItems}>
       <NavLink to={path} activeClassName={style.active}>
-        {props.name}
+
+          {props.name}
       </NavLink>
     </div>
   );

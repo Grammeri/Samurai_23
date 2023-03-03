@@ -2,12 +2,12 @@ import React from "react";
 import style from "./Post.module.css";
 import Fox from "./../../../../assets/fox.jpg";
 
-type PropsType = {
+type PostPropsType = {
   message: string;
-  likeCount: number;
+  likesCount: number;
 };
 
-export const Post = (props: PropsType) => {
+export const Post = (props: PostPropsType) => {
   return (
     <div className={style.item}>
       <div>
@@ -15,7 +15,7 @@ export const Post = (props: PropsType) => {
         {props.message}
         <div>
           <span>like</span>
-          {" " + props.likeCount}
+          {" " + props.likesCount}
         </div>
       </div>
     </div>
