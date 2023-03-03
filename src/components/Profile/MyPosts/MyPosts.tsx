@@ -22,13 +22,9 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
   let addPost = () => {
-    debugger;
-    let text = newPostElement.current?.value;
-    let subText = newPostElement.current;
-    if (subText) {
-      if (typeof text === "string") {
-        props.addPost(text);
-      }
+    if (newPostElement.current) {
+      props.addPost(newPostElement.current?.value);
+      newPostElement.current.value = " ";
     }
   };
 

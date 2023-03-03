@@ -75,9 +75,8 @@ export const state: RootStateType = {
 };
 
 export let addPost = (postMessage: string) => {
-  debugger;
   let newPost: PostType = { id: 3, message: postMessage, likesCount: 0 };
 
   state.profilePage.postsData.push(newPost);
-  rerenderEntireTree();
+  rerenderEntireTree(state);
 };
