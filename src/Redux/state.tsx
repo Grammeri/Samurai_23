@@ -27,6 +27,7 @@ export type FriendsType = {
 
 export type ProfilePageType = {
   postsData: Array<PostType>;
+  newPostText: string;
 };
 
 export type MessagePageType = {
@@ -46,6 +47,7 @@ export const state: RootStateType = {
       { id: 1, message: "How are you?", likesCount: 15 },
       { id: 2, message: "I am good!", likesCount: 20 },
     ],
+    newPostText: "",
   },
   dialogsPage: {
     dialogsData: [
@@ -74,9 +76,30 @@ export const state: RootStateType = {
   },
 };
 
-export let addPost = (postMessage: string) => {
-  let newPost: PostType = { id: 3, message: postMessage, likesCount: 0 };
+// @ts-ignore
+window.state = state;
+
+
+/*export let addPost = (postMessage:string) => {
+  let newPost: PostType = {
+    id: 3,
+    message: postMessage,
+    likesCount: 0,
+  };*/
+//Change the above to the following:
+export let addPost = () => {
+  let newPost: PostType = {
+    id: 3,
+    message: state.profilePage.newPostText,
+    likesCount: 0,
+  };
 
   state.profilePage.postsData.push(newPost);
+  state.profilePage.newPostText = "";
+  rerenderEntireTree(state);
+};
+
+export let updateNewPostText = (newText: string) => {
+  state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };

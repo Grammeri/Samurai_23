@@ -1,12 +1,13 @@
 import React from "react";
-import { Post } from "./Post/Post";
+import {Post} from "./Post/Post";
 import style from "./MyPosts.module.css";
-import { ProfilePageType } from "../../../Redux/state";
-import { text } from "stream/consumers";
+import {ProfilePageType} from "../../../Redux/state";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;
-  addPost: (message: string) => void;
+  addPost: (/*message: string*/) => void;
+  newPostText: string;
+  updateNewPostText: (newPostText: string) => void;
 };
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -21,11 +22,21 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-  let addPost = () => {
+  /*  let addPost = () => {
     if (newPostElement.current) {
       props.addPost(newPostElement.current?.value);
-      newPostElement.current.value = " ";
+      //props.updateNewPostText("");
     }
+  };*/
+
+  let addNewPost = () => {
+    //let text = newPostElement.current?.value as string
+    props.addPost();
+  };
+
+  let onPostChangeHandler = () => {
+    //console.log(newPostElement.current?.value);
+    props.updateNewPostText(newPostElement.current?.value as string);
   };
 
   return (
@@ -34,10 +45,14 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
         <h2>My posts</h2>
         <div className={style.textareaAndBtn}>
           <div className={style.textarea}>
-            <textarea ref={newPostElement}></textarea>
+            <textarea
+              ref={newPostElement}
+              value={props.newPostText}
+              onChange={onPostChangeHandler}
+            />
           </div>
           <div className={style.button}>
-            <button onClick={addPost}>Add post</button>
+            <button onClick={addNewPost}>Add post</button>
           </div>
         </div>
       </div>
