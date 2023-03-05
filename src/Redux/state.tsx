@@ -46,10 +46,23 @@ export type StoreType = {
   updateNewPostText: (newText: string) => void;
   subscribe: (observer: (store: StoreType) => void) => void;
   getState: () => RootStateType;
+  dispatch: (actions: ActionsTypes) => void;
   /*profilePage: ProfilePageType;
   dialogsPage: MessagePageType;
   stateBar: FriendsType;*/
 };
+
+export type AddPostActionType = {
+  type: "ADD-POST";
+  newPostText: string;
+};
+
+export type UpdateNewPostActionType = {
+  type: "UPDATE-NEW-POST-TEXT";
+  newText: string;
+};
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostActionType;
 
 export let store: StoreType = {
   state: {
@@ -90,6 +103,10 @@ export let store: StoreType = {
   getState() {
     return this.state;
   },
+
+  subscribe(observer) {
+    this.callSubscriber = observer; //patern == addEventListener == publisher subscriber
+  },
   callSubscriber(store: StoreType) {
     //rerenderEntireTree
     console.log("State changed");
@@ -111,8 +128,20 @@ export let store: StoreType = {
     this.callSubscriber(store);
   },
 
-  subscribe(observer) {
-    this.callSubscriber = observer; //patern == addEventListener == publisher subscriber
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      let newPost: PostType = {
+        id: 3,
+        message: store.getState().profilePage.newPostText,
+        likesCount: 0,
+      };
+      this.state.profilePage.postsData.push(newPost);
+      this.state.profilePage.newPostText = "";
+      this.callSubscriber(this);
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+      this.state.profilePage.newPostText = action.newText;
+      this.callSubscriber(store);
+    }
   },
 };
 
