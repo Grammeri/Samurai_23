@@ -1,7 +1,14 @@
 import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
-import { ActionsTypes, ProfilePageType } from "../../../Redux/state";
+import {
+  ActionsTypes,
+  AddPostActionCreator,
+  AddPostActionType,
+  ProfilePageType,
+  UpdateNewPostActionCreator,
+  UpdateNewPostActionType,
+} from "../../../Redux/state";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;
@@ -32,16 +39,13 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
   let addNewPost = () => {
     //let text = newPostElement.current?.value as string
-    props.dispatch({ type: "ADD-POST" });
+    props.dispatch(AddPostActionCreator());
   };
 
   let onPostChangeHandler = () => {
     //console.log(newPostElement.current?.value);
-    let action = {
-      type: "UPDATE-NEW-POST-TEXT",
-      newText: newPostElement.current?.value as string,
-    };
-    props.dispatch(action);
+    let newPost = newPostElement.current?.value as string;
+    props.dispatch(UpdateNewPostActionCreator(newPost));
   };
 
   return (
