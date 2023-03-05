@@ -1,14 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./NavBar.module.css";
-import {Friends} from "./Friends/Friends";
-import {RootStateType, state} from "../../Redux/state";
+import { Friends } from "./Friends/Friends";
+import { StoreType } from "../../Redux/state";
+
+type NavBarPropsType = {
+  store: StoreType;
+};
 
 /*type NavBarPropsType = {
     state:RootStateType
 }*/
 
-export const NavBar = () => {
+export const NavBar = (props: NavBarPropsType) => {
   return (
     <div className={style.sideBar}>
       <div className={style.item}>
@@ -36,9 +40,9 @@ export const NavBar = () => {
           Settings
         </NavLink>
       </div>
-        <div>
-            <Friends friends={state.stateBar.friends}/>
-        </div>
+      <div>
+        <Friends friends={props.store.state.stateBar.friends} />
+      </div>
     </div>
   );
 };
