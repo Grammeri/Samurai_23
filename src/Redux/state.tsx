@@ -1,6 +1,9 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
+const UPDATE_NEW_DIALOG_MESSAGE = "UPDATE-NEW-DIALOG-MESSAGE";
+const SEND_DIALOG_MESSAGE = "SEND-DIALOG-MESSAGE";
+
 export type MessageType = {
   id: number;
   message: string;
@@ -34,6 +37,7 @@ export type ProfilePageType = {
 export type MessagePageType = {
   dialogsData: Array<DialogType>;
   messageData: Array<MessageType>;
+  newMessageText: string;
 };
 
 export type RootStateType = {
@@ -45,15 +49,9 @@ export type RootStateType = {
 export type StoreType = {
   state: RootStateType;
   callSubscriber: (store: StoreType) => void;
-  //addPost: () => void;
-  //updateNewPostText: (newText: string) => void;
   subscribe: (observer: (store: StoreType) => void) => void;
   getState: () => RootStateType;
   dispatch: (actions: ActionsTypes) => void;
-};
-
-export type AddPostActionType = {
-  type: "ADD-POST";
 };
 
 export type UpdateNewPostActionType = {
@@ -61,7 +59,11 @@ export type UpdateNewPostActionType = {
   newText: string;
 };
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostActionType;
+export type ActionsTypes =
+  | AddPostActionType
+  | UpdateNewPostActionType
+  | AddNewDialogMessageType
+  | SendDialogMessageType;
 
 export let store: StoreType = {
   state: {
@@ -70,7 +72,7 @@ export let store: StoreType = {
         { id: 1, message: "How are you?", likesCount: 15 },
         { id: 2, message: "I am good!", likesCount: 20 },
       ],
-      newPostText: "NewPostText message",
+      newPostText: "NewPostText",
     },
     dialogsPage: {
       dialogsData: [
@@ -89,6 +91,7 @@ export let store: StoreType = {
         { id: 5, message: "Yo" },
         { id: 6, message: "Yo" },
       ],
+      newMessageText: "NewMessageText",
     },
     stateBar: {
       friends: [
@@ -124,12 +127,24 @@ export let store: StoreType = {
     } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this.state.profilePage.newPostText = action.newText;
       this.callSubscriber(store);
+    } else if (action.type === UPDATE_NEW_DIALOG_MESSAGE) {
+      this.state.dialogsPage.newMessageText = action.newDialogMessage;
+      this.callSubscriber(store);
+    } else if (action.type === SEND_DIALOG_MESSAGE) {
+      let newDialogMessage: MessageType = {
+        id: 7,
+        message: store.getState().dialogsPage.newMessageText,
+      };
+
+      this.state.dialogsPage.messageData.push(newDialogMessage);
+      this.state.dialogsPage.newMessageText = "";
+      this.callSubscriber(this);
     }
   },
 };
 
-export const AddPostActionCreator = (): AddPostActionType =>
-  ({ type: ADD_POST } as const);
+export type AddPostActionType = ReturnType<typeof AddPostActionCreator>;
+export const AddPostActionCreator = () => ({ type: ADD_POST } as const);
 
 export const UpdateNewPostActionCreator = (
   newPost: string
@@ -139,5 +154,18 @@ export const UpdateNewPostActionCreator = (
     newText: newPost,
   };
 };
+
+export type AddNewDialogMessageType = ReturnType<
+  typeof AddNewDialogMessageActionCreator
+>;
+export const AddNewDialogMessageActionCreator = (newDialogMessage: string) =>
+  ({ type: UPDATE_NEW_DIALOG_MESSAGE, newDialogMessage } as const);
+
+export type SendDialogMessageType = ReturnType<
+  typeof SendDialogMessageActionCreator
+>;
+
+export const SendDialogMessageActionCreator = () =>
+  ({ type: SEND_DIALOG_MESSAGE } as const);
 // @ts-ignore
 window.store = store;

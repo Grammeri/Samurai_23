@@ -18,3 +18,16 @@
 
 .messages .message {
 }
+
+.messageTextarea {
+  display: flex;
+  padding-right: 5px;
+}
+
+.messageButton {
+  height: 55px;
+  width: 100px;
+  background-color: darkgreen;
+  margin-left: 15px;
+  color: white;
+}
