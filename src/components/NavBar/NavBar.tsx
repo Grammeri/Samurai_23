@@ -41,7 +41,7 @@ export const NavBar = (props: NavBarPropsType) => {
         </NavLink>
       </div>
       <div>
-        <Friends friends={props.store.state.stateBar.friends} />
+        <Friends friends={props.store.state.sideBar.friends} />
       </div>
     </div>
   );

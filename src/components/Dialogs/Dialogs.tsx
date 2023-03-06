@@ -1,14 +1,12 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import style from "./Dialogs.module.css";
 import { Message } from "./Message/Message";
 import { DialogItem } from "./DialogItem/DialogItem";
+import { DialogType, MessageType, StoreType } from "../../Redux/state";
 import {
   AddNewDialogMessageActionCreator,
-  DialogType,
-  MessageType,
   SendDialogMessageActionCreator,
-  StoreType,
-} from "../../Redux/state";
+} from "../../Redux/dialogReducer";
 
 type DialogsPropsType = {
   dialogsData: Array<DialogType>;
@@ -28,7 +26,7 @@ export const Dialogs = (props: DialogsPropsType) => {
     props.store.dispatch(SendDialogMessageActionCreator());
   };
 
-  let dialogsTextAreaHandler = (e: any) => {
+  let dialogsTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     props.store.dispatch(AddNewDialogMessageActionCreator(e.target.value));
   };
 

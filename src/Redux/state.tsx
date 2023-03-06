@@ -1,8 +1,10 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-
-const UPDATE_NEW_DIALOG_MESSAGE = "UPDATE-NEW-DIALOG-MESSAGE";
-const SEND_DIALOG_MESSAGE = "SEND-DIALOG-MESSAGE";
+import { AddPostActionType, profileReducer } from "./profileReducer";
+import {
+  AddNewDialogMessageType,
+  dialogsReducer,
+  SendDialogMessageType,
+} from "./dialogReducer";
+import { sideBarReducer } from "./sidebarReducer";
 
 export type MessageType = {
   id: number;
@@ -29,6 +31,10 @@ export type FriendsType = {
   friends: Array<FriendType>;
 };
 
+/*export type sideBarType = {
+  sideBar: FriendsType;
+};*/
+
 export type ProfilePageType = {
   postsData: Array<PostType>;
   newPostText: string;
@@ -43,7 +49,7 @@ export type MessagePageType = {
 export type RootStateType = {
   profilePage: ProfilePageType;
   dialogsPage: MessagePageType;
-  stateBar: FriendsType;
+  sideBar: FriendsType;
 };
 
 export type StoreType = {
@@ -93,7 +99,7 @@ export let store: StoreType = {
       ],
       newMessageText: "NewMessageText",
     },
-    stateBar: {
+    sideBar: {
       friends: [
         { id: 1, name: "Andrew" },
         { id: 2, name: "Sasha" },
@@ -115,57 +121,13 @@ export let store: StoreType = {
   },
 
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      let newPost: PostType = {
-        id: 3,
-        message: store.getState().profilePage.newPostText,
-        likesCount: 0,
-      };
-      this.state.profilePage.postsData.push(newPost);
-      this.state.profilePage.newPostText = "";
-      this.callSubscriber(this);
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this.state.profilePage.newPostText = action.newText;
-      this.callSubscriber(store);
-    } else if (action.type === UPDATE_NEW_DIALOG_MESSAGE) {
-      this.state.dialogsPage.newMessageText = action.newDialogMessage;
-      this.callSubscriber(store);
-    } else if (action.type === SEND_DIALOG_MESSAGE) {
-      let newDialogMessage: MessageType = {
-        id: 7,
-        message: store.getState().dialogsPage.newMessageText,
-      };
+    this.state.profilePage = profileReducer(this.state.profilePage, action);
+    this.state.dialogsPage = dialogsReducer(this.state.dialogsPage, action);
+    this.state.sideBar = sideBarReducer(this.state.sideBar, action);
 
-      this.state.dialogsPage.messageData.push(newDialogMessage);
-      this.state.dialogsPage.newMessageText = "";
-      this.callSubscriber(this);
-    }
+    this.callSubscriber(store);
   },
 };
 
-export type AddPostActionType = ReturnType<typeof AddPostActionCreator>;
-export const AddPostActionCreator = () => ({ type: ADD_POST } as const);
-
-export const UpdateNewPostActionCreator = (
-  newPost: string
-): UpdateNewPostActionType => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newPost,
-  };
-};
-
-export type AddNewDialogMessageType = ReturnType<
-  typeof AddNewDialogMessageActionCreator
->;
-export const AddNewDialogMessageActionCreator = (newDialogMessage: string) =>
-  ({ type: UPDATE_NEW_DIALOG_MESSAGE, newDialogMessage } as const);
-
-export type SendDialogMessageType = ReturnType<
-  typeof SendDialogMessageActionCreator
->;
-
-export const SendDialogMessageActionCreator = () =>
-  ({ type: SEND_DIALOG_MESSAGE } as const);
 // @ts-ignore
 window.store = store;
