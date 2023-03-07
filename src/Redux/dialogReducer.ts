@@ -49,22 +49,6 @@ export type RootStateType = {
   sideBar: FriendsType;
 };
 
-/*export type StoreType = {
-  state: RootStateType;
-  callSubscriber: (store: StoreType) => void;
-  subscribe: (observer: (store: StoreType) => void) => void;
-  getState: () => RootStateType;
-  dispatch: (actions: ActionsTypes) => void;
-};*/
-
-/*type InitialStateType = MessagePageType;
-
-export const initialState: InitialStateType = {
-  dialogsData: [],
-  messageData: [],
-  newMessageText: "",
-};*/
-
 export type InitialStateType = MessagePageType;
 export let initialState: InitialStateType = {
   dialogsData: [

@@ -12,8 +12,6 @@ import {
 } from "../../Redux/dialogReducer";
 
 type DialogsPropsType = {
-  //dialogsData: Array<DialogType>;
-  //messageData: Array<MessageType>;
   dispatch: (action: ActionsTypes) => void;
   dialogsPage: MessagePageType;
 };

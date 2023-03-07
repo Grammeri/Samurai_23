@@ -40,18 +40,8 @@ export type RootStateType = {
   sideBar: FriendsType;
 };
 
-/*export type StoreType = {
-  state: RootStateType;
-  callSubscriber: (store: StoreType) => void;
-  subscribe: (observer: (store: StoreType) => void) => void;
-  getState: () => RootStateType;
-  dispatch: (actions: ActionsTypes) => void;
-};*/
-
-//type InitialStateType = ProfilePageType;
 export type InitialStateType = ProfilePageType;
 
-//const initialState: InitialStateType = { newPostText: "", postsData: [] };
 export let initialState: InitialStateType = {
   postsData: [
     { id: 1, message: "How are you?", likesCount: 15 },
