@@ -1,3 +1,4 @@
+/*
 import { AddPostActionType, profileReducer } from "./profileReducer";
 import {
   AddNewDialogMessageType,
@@ -31,9 +32,9 @@ export type FriendsType = {
   friends: Array<FriendType>;
 };
 
-/*export type sideBarType = {
+/!*export type sideBarType = {
   sideBar: FriendsType;
-};*/
+};*!/
 
 export type ProfilePageType = {
   postsData: Array<PostType>;
@@ -131,3 +132,5 @@ export let store: StoreType = {
 
 // @ts-ignore
 window.store = store;
+*/
+export default {};

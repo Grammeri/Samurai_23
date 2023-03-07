@@ -2,32 +2,41 @@ import React, { ChangeEvent } from "react";
 import style from "./Dialogs.module.css";
 import { Message } from "./Message/Message";
 import { DialogItem } from "./DialogItem/DialogItem";
-import { DialogType, MessageType, StoreType } from "../../Redux/state";
 import {
+  ActionsTypes,
   AddNewDialogMessageActionCreator,
+  DialogType,
+  MessagePageType,
+  RootStateType,
   SendDialogMessageActionCreator,
 } from "../../Redux/dialogReducer";
 
 type DialogsPropsType = {
-  dialogsData: Array<DialogType>;
-  messageData: Array<MessageType>;
-  store: StoreType;
+  //dialogsData: Array<DialogType>;
+  //messageData: Array<MessageType>;
+  dispatch: (action: ActionsTypes) => void;
+  dialogsPage: MessagePageType;
 };
 
 export const Dialogs = (props: DialogsPropsType) => {
-  let dialog = props.dialogsData.map((dialog) => (
-    <DialogItem name={dialog.name} id={dialog.id} />
+  let dialog = props.dialogsPage.dialogsData.map(
+    (dialog: { name: string; id: number }) => (
+      <DialogItem name={dialog.name} id={dialog.id} />
+    )
+  );
+  let message = props.dialogsPage.messageData.map((m: { message: string }) => (
+    <Message message={m.message} />
   ));
-  let message = props.messageData.map((m) => <Message message={m.message} />);
-  let newMessageDialogsPageText =
-    props.store.getState().dialogsPage.newMessageText;
+  /*  let newMessageDialogsPageText =
+    props.store.getState()
+        .dialogsPage.newMessageText;*/
 
   let dialogBtnHandler = () => {
-    props.store.dispatch(SendDialogMessageActionCreator());
+    props.dispatch(SendDialogMessageActionCreator());
   };
 
   let dialogsTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.store.dispatch(AddNewDialogMessageActionCreator(e.target.value));
+    props.dispatch(AddNewDialogMessageActionCreator(e.target.value));
   };
 
   return (
@@ -37,7 +46,7 @@ export const Dialogs = (props: DialogsPropsType) => {
       <div className={style.messageTextarea}>
         <textarea
           onChange={dialogsTextAreaHandler}
-          value={props.store.getState().dialogsPage.newMessageText}
+          value={props.dialogsPage.newMessageText}
           placeholder={"Enter your message"}
         ></textarea>
         <button onClick={dialogBtnHandler} className={style.messageButton}>

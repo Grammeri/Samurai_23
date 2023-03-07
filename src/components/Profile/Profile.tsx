@@ -2,13 +2,10 @@ import React from "react";
 import { MyPosts } from "./MyPosts/MyPosts";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import style from "./Profile.module.css";
-import { ActionsTypes, ProfilePageType, StoreType } from "../../Redux/state";
+import { ActionsTypes, ProfilePageType } from "../../Redux/dialogReducer";
 
 type ProfilePropsType = {
-  //addPost: (/*message: string*/) => void;
   profilePage: ProfilePageType;
-  //updateNewPostText: (newPostText: string) => void;
-  store: StoreType;
   dispatch: (action: ActionsTypes) => void;
 };
 
@@ -17,10 +14,8 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     <div className={style.profile}>
       <ProfileInfo />
       <MyPosts
-        profilePage={props.store.getState().profilePage}
-        //addPost={props.store.addPost.bind(props.store)}
-        newPostText={props.store.getState().profilePage.newPostText}
-        //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+        profilePage={props.profilePage}
+        newPostText={props.profilePage.newPostText}
         dispatch={props.dispatch}
       />
     </div>
