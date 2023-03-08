@@ -2,23 +2,17 @@ import React, { ChangeEvent } from "react";
 import style from "./Dialogs.module.css";
 import { Message } from "./Message/Message";
 import { DialogItem } from "./DialogItem/DialogItem";
-import {
-  ActionsTypes,
-  AddNewDialogMessageActionCreator,
-  DialogType,
-  MessagePageType,
-  RootStateType,
-  SendDialogMessageActionCreator,
-} from "../../Redux/dialogReducer";
+import { MessagePageType } from "../../Redux/dialogReducer";
 
 type DialogsPropsType = {
-  dispatch: (action: ActionsTypes) => void;
+  //dispatch: (action: any) => void;
   dialogsPage: MessagePageType;
-  updateDialogsTextAreaText:any
-  sendMessage:()=>void
+  updateDialogsTextAreaText: any;
+  sendMessage: (text: string) => void;
+  //postsData: Array<PostType>
 };
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
   let dialog = props.dialogsPage.dialogsData.map(
     (dialog: { name: string; id: number }) => (
       <DialogItem name={dialog.name} id={dialog.id} />
@@ -32,13 +26,13 @@ export const Dialogs = (props: DialogsPropsType) => {
         .dialogsPage.newMessageText;*/
 
   let dialogBtnHandler = () => {
-    props.sendMessage()
-    props.dispatch(SendDialogMessageActionCreator());
+    props.sendMessage("");
+    //props.dispatch(SendDialogMessageActionCreator());
   };
 
   let dialogsTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let newDialogsTextAreaText = e.target.value
-    props.updateDialogsTextAreaText(newDialogsTextAreaText)
+    let newDialogsTextAreaText = e.target.value;
+    props.updateDialogsTextAreaText(newDialogsTextAreaText);
     //props.dispatch(AddNewDialogMessageActionCreator(e.target.value));
   };
 
@@ -59,8 +53,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     </div>
   );
 };
-
-
 
 //Dialogs copy
 /*import React, { ChangeEvent } from "react";

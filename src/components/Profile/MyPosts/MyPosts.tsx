@@ -9,9 +9,9 @@ import { ActionsTypes, ProfilePageType } from "../../../Redux/dialogReducer";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;
-  addPost: (/*message: string*/) => void;
+  addNewPost: (/*message: string*/) => void;
   newPostText: string;
-  updateNewPostText: (newPostText: string) => void;
+  onPostChangeHandler: (newPostText: string) => void;
   //dispatch: (action: ActionsTypes) => void;
 };
 
@@ -35,14 +35,14 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
   };*/
 
   let onAddPost = () => {
-    props.addPost();
+    props.addNewPost();
     //let text = newPostElement.current?.value as string
     /*props.dispatch(AddPostActionCreator());*/
   };
 
   let onPostChangeHandler = () => {
     //console.log(newPostElement.current?.value);
-    props.updateNewPostText(newPostElement.current?.value as string);
+    props.onPostChangeHandler(newPostElement.current?.value as string);
     /*    let newPost = newPostElement.current?.value as string;
     props.dispatch(UpdateNewPostActionCreator(newPost));*/
   };
