@@ -5,16 +5,17 @@ import {
   AddNewDialogMessageActionCreator,
   SendDialogMessageActionCreator,
 } from "../../Redux/dialogReducer";
-import {Dialogs} from "./Dialogs";
-import {StoreType} from "../../Redux/reduxStore";
+import { Dialogs } from "./Dialogs";
+import { StoreType } from "../../Redux/reduxStore";
+import StoreContext from "../../StoreContext";
 
 type DialogsPropsType = {
   //dispatch: (action: ActionsTypes) => void;
   //dialogsPage: MessagePageType;
-  store:StoreType
+  //store: StoreType;
 };
 
-export const DialogsContainer = (props: DialogsPropsType) => {
+export const DialogsContainer = (/*props: DialogsPropsType*/) => {
   /*let dialog = props.dialogsPage.dialogsData.map(
     (dialog: { name: string; id: number }) => (
       <DialogItem name={dialog.name} id={dialog.id} />
@@ -27,20 +28,40 @@ export const DialogsContainer = (props: DialogsPropsType) => {
     props.store.getState()
         .dialogsPage.newMessageText;*/
 
-  let dialogBtnHandler = () => {
+  /*  let dialogBtnHandler = () => {
     props.store.dispatch(SendDialogMessageActionCreator());
   };
 
-  let dialogsTextAreaHandler = (newDialogsTextAreaText:any) => {
-    props.store.dispatch(AddNewDialogMessageActionCreator(newDialogsTextAreaText));
-  };
+  let dialogsTextAreaHandler = (newDialogsTextAreaText: any) => {
+    props.store.dispatch(
+      AddNewDialogMessageActionCreator(newDialogsTextAreaText)
+    );
+  };*/
 
   return (
-    <div className={style.dialogs}>
-      <Dialogs updateDialogsTextAreaText={dialogsTextAreaHandler}
-               dialogsPage={props.store.getState().dialogsPage}
-               sendMessage={dialogBtnHandler}
-               dispatch={props.store.dispatch}/>
-    </div>
+    <StoreContext.Consumer>
+      {(store) => {
+        let state = store.getState();
+
+        let dialogBtnHandler = () => {
+          store.dispatch(SendDialogMessageActionCreator());
+        };
+
+        let dialogsTextAreaHandler = (newDialogsTextAreaText: any) => {
+          store.dispatch(
+            AddNewDialogMessageActionCreator(newDialogsTextAreaText)
+          );
+        };
+
+        return (
+          <Dialogs
+            updateDialogsTextAreaText={dialogsTextAreaHandler}
+            dialogsPage={store.getState().dialogsPage}
+            sendMessage={dialogBtnHandler}
+            dispatch={store.dispatch}
+          />
+        );
+      }}
+    </StoreContext.Consumer>
   );
 };
