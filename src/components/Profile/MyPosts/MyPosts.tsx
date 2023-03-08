@@ -12,7 +12,7 @@ export type MyPostsType = {
   addPost: (/*message: string*/) => void;
   newPostText: string;
   updateNewPostText: (newPostText: string) => void;
-  dispatch: (action: ActionsTypes) => void;
+  //dispatch: (action: ActionsTypes) => void;
 };
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -35,7 +35,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
   };*/
 
   let onAddPost = () => {
-    props.addPost()
+    props.addPost();
     //let text = newPostElement.current?.value as string
     /*props.dispatch(AddPostActionCreator());*/
   };
@@ -43,7 +43,7 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
   let onPostChangeHandler = () => {
     //console.log(newPostElement.current?.value);
     props.updateNewPostText(newPostElement.current?.value as string);
-/*    let newPost = newPostElement.current?.value as string;
+    /*    let newPost = newPostElement.current?.value as string;
     props.dispatch(UpdateNewPostActionCreator(newPost));*/
   };
 
