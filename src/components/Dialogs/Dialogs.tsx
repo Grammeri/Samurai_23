@@ -2,31 +2,35 @@ import React, { ChangeEvent } from "react";
 import style from "./Dialogs.module.css";
 import { Message } from "./Message/Message";
 import { DialogItem } from "./DialogItem/DialogItem";
-import { MessagePageType } from "../../Redux/dialogReducer";
+import {
+  ActionsTypes,
+  MessagePageType,
+  PostType,
+} from "../../Redux/dialogReducer";
 
 type DialogsPropsType = {
-  //dispatch: (action: any) => void;
+  dispatch: (action: ActionsTypes) => void;
   dialogsPage: MessagePageType;
   updateDialogsTextAreaText: any;
-  sendMessage: (text: string) => void;
-  //postsData: Array<PostType>
+  sendMessage: () => void;
+  postsData: Array<PostType>;
 };
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
   let dialog = props.dialogsPage.dialogsData.map(
     (dialog: { name: string; id: number }) => (
-      <DialogItem name={dialog.name} id={dialog.id} />
+      <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />
     )
   );
-  let message = props.dialogsPage.messageData.map((m: { message: string }) => (
-    <Message message={m.message} />
-  ));
-  /*  let newMessageDialogsPageText =
-    props.store.getState()
-        .dialogsPage.newMessageText;*/
+  let message = props.dialogsPage.messageData.map(
+    (m: { message: string; id: number }) => (
+      <Message key={m.id} message={m.message} />
+    )
+  );
+  let newMessageDialogsPageText = props.dialogsPage.newMessageText;
 
   let dialogBtnHandler = () => {
-    props.sendMessage("");
+    props.sendMessage();
     //props.dispatch(SendDialogMessageActionCreator());
   };
 
@@ -43,7 +47,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
       <div className={style.messageTextarea}>
         <textarea
           onChange={dialogsTextAreaHandler}
-          value={props.dialogsPage.newMessageText}
+          value={newMessageDialogsPageText}
           placeholder={"Enter your message"}
         ></textarea>
         <button onClick={dialogBtnHandler} className={style.messageButton}>

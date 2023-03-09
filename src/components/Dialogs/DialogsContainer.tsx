@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AddNewDialogMessageActionCreator,
+  RootStateType,
   SendDialogMessageActionCreator,
 } from "../../Redux/dialogReducer";
 import { Dialogs } from "./Dialogs";
@@ -13,19 +14,19 @@ import { Dispatch } from "redux";
   store: StoreType;
 };*/
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: RootStateType) => {
   return {
-    dialogsPage: state.dialogsPage,
+    dialogsPage: state.dialogsPage, //это попадает в Dialogs
   };
 };
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    updateDialogsTextAreaText: () => {
+    sendMessage: () => {
       dispatch(SendDialogMessageActionCreator());
     },
-    sendMessage: (newDialogsTextAreaText: string) => {
-      dispatch(AddNewDialogMessageActionCreator(newDialogsTextAreaText));
+    updateDialogsTextAreaText: (text: string) => {
+      dispatch(AddNewDialogMessageActionCreator(text));
     },
   };
 };

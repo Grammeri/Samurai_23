@@ -1,11 +1,7 @@
 import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
-import {
-  AddPostActionCreator,
-  UpdateNewPostActionCreator,
-} from "../../../Redux/profileReducer";
-import { ActionsTypes, ProfilePageType } from "../../../Redux/dialogReducer";
+import { ProfilePageType } from "../../../Redux/dialogReducer";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;
@@ -16,23 +12,11 @@ export type MyPostsType = {
 };
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
-  /*  let postsData = [
-        { id: 1, message: "How are you?", likesCount: 15 },
-        { id: 2, message: "I am good!", likesCount: 20 },
-      ];*/
-
   let postsElements = props.profilePage.postsData.map((el) => (
     <Post message={el.message} likesCount={el.likesCount} />
   ));
 
   let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-  /*  let addPost = () => {
-    if (newPostElement.current) {
-      props.addPost(newPostElement.current?.value);
-      //props.updateNewPostText("");
-    }
-  };*/
 
   let onAddPost = () => {
     props.addNewPost();
@@ -41,7 +25,6 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
   };
 
   let onPostChangeHandler = () => {
-    //console.log(newPostElement.current?.value);
     props.onPostChangeHandler(newPostElement.current?.value as string);
     /*    let newPost = newPostElement.current?.value as string;
     props.dispatch(UpdateNewPostActionCreator(newPost));*/
