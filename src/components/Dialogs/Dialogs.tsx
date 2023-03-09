@@ -3,13 +3,13 @@ import style from "./Dialogs.module.css";
 import { Message } from "./Message/Message";
 import { DialogItem } from "./DialogItem/DialogItem";
 import {
-  ActionsTypes,
+  DialogsReducerActionsTypes,
   MessagePageType,
-  PostType,
 } from "../../Redux/dialogReducer";
+import { PostType } from "../../Redux/profileReducer";
 
 type DialogsPropsType = {
-  dispatch: (action: ActionsTypes) => void;
+  dispatch: (action: DialogsReducerActionsTypes) => void;
   dialogsPage: MessagePageType;
   updateDialogsTextAreaText: any;
   sendMessage: () => void;

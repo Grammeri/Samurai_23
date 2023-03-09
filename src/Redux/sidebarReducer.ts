@@ -13,15 +13,8 @@ export type FriendsType = {
   friends: Array<FriendType>;
 };
 
-export type sideBarType = {
-  sideBar: FriendsType;
-};
-
-/*type InitialStateType = FriendsType;
-
-const initialState: InitialStateType = { friends: [] };*/
-
 export type InitialStateType = FriendsType;
+
 export let initialState: InitialStateType = {
   friends: [
     { id: 1, name: "Andrew" },

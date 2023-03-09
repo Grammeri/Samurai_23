@@ -4,9 +4,9 @@ import {
   UpdateNewPostActionCreator,
 } from "../../../Redux/profileReducer";
 import { Dispatch } from "redux";
-import { RootStateType } from "../../../Redux/dialogReducer";
 import { connect } from "react-redux";
 import { MyPosts } from "./MyPosts";
+import { AppStateType } from "../../../Redux/reduxStore";
 
 /*export type MyPostsContainerType = {
   //profilePage: ProfilePageType;
@@ -17,7 +17,7 @@ import { MyPosts } from "./MyPosts";
   store: StoreType;
 };*/
 
-let mapStateToProps = (state: RootStateType) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     profilePage: state.profilePage,
     // postsData: state.profilePage.postsData,

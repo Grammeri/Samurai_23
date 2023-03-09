@@ -3,50 +3,20 @@ import { AddPostActionType, UpdateNewPostActionType } from "./profileReducer";
 const UPDATE_NEW_DIALOG_MESSAGE = "UPDATE-NEW-DIALOG-MESSAGE";
 const SEND_DIALOG_MESSAGE = "SEND-DIALOG-MESSAGE";
 
-export type MessageType = {
-  id: number;
-  message: string;
-};
-
 export type DialogType = {
   id: number;
   name: string;
 };
 
-export type PostType = {
-  id?: number;
-  message: string;
-  likesCount: number;
-};
-
-export type FriendType = {
+export type MessageType = {
   id: number;
-  name: string;
-};
-
-export type FriendsType = {
-  friends: Array<FriendType>;
-};
-
-export type sideBarType = {
-  sideBar: FriendsType;
-};
-
-export type ProfilePageType = {
-  postsData: Array<PostType>;
-  newPostText: string;
+  message: string;
 };
 
 export type MessagePageType = {
   dialogsData: Array<DialogType>;
   messageData: Array<MessageType>;
   newMessageText: string;
-};
-
-export type RootStateType = {
-  profilePage: ProfilePageType;
-  dialogsPage: MessagePageType;
-  sideBar: FriendsType;
 };
 
 export type InitialStateType = MessagePageType;
@@ -72,7 +42,7 @@ export let initialState: InitialStateType = {
 
 export const dialogsReducer = (
   state = initialState,
-  action: ActionsTypes
+  action: DialogsReducerActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case UPDATE_NEW_DIALOG_MESSAGE: {
@@ -114,8 +84,6 @@ export type SendDialogMessageType = ReturnType<
 export const SendDialogMessageActionCreator = () =>
   ({ type: SEND_DIALOG_MESSAGE } as const);
 
-export type ActionsTypes =
-  | AddPostActionType
-  | UpdateNewPostActionType
+export type DialogsReducerActionsTypes =
   | AddNewDialogMessageType
   | SendDialogMessageType;

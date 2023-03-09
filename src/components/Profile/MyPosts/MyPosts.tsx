@@ -1,7 +1,7 @@
 import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
-import { ProfilePageType } from "../../../Redux/dialogReducer";
+import { ProfilePageType } from "../../../Redux/profileReducer";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;

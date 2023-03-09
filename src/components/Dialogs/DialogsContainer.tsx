@@ -1,12 +1,12 @@
 import React from "react";
 import {
   AddNewDialogMessageActionCreator,
-  RootStateType,
   SendDialogMessageActionCreator,
 } from "../../Redux/dialogReducer";
 import { Dialogs } from "./Dialogs";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+import { AppStateType } from "../../Redux/reduxStore";
 
 /*type DialogsPropsType = {
   dispatch: (action: ActionsTypes) => void;
@@ -14,7 +14,7 @@ import { Dispatch } from "redux";
   store: StoreType;
 };*/
 
-let mapStateToProps = (state: RootStateType) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     dialogsPage: state.dialogsPage, //это попадает в Dialogs
   };

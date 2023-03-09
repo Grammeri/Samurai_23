@@ -1,21 +1,20 @@
 import {
   AddNewDialogMessageType,
-  FriendsType,
   SendDialogMessageType,
 } from "./dialogReducer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-export type MessageType = {
+/*export type MessageType = {
   id: number;
   message: string;
-};
+};*/
 
-export type DialogType = {
+/*export type DialogType = {
   id: number;
   name: string;
-};
+};*/
 
 export type PostType = {
   id?: number;
@@ -26,18 +25,6 @@ export type PostType = {
 export type ProfilePageType = {
   postsData: Array<PostType>;
   newPostText: string;
-};
-
-export type MessagePageType = {
-  dialogsData: Array<DialogType>;
-  messageData: Array<MessageType>;
-  newMessageText: string;
-};
-
-export type RootStateType = {
-  profilePage: ProfilePageType;
-  dialogsPage: MessagePageType;
-  sideBar: FriendsType;
 };
 
 export type InitialStateType = ProfilePageType;
