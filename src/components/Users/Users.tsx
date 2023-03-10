@@ -1,44 +1,23 @@
 import React from "react";
 import style from "./Users.module.css";
+import { UserType } from "../../Redux/usersReducer";
+import axios from "axios";
+import Cat from "./../../assets/cat.jpg";
 
 export type UsersPropsType = {
-  users: any;
-  follow: any;
-  unfollow: any;
-  setUsers: any;
+  users: Array<UserType>;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
+  setUsers: (users: Array<UserType>) => void;
 };
 
 export const Users = (props: UsersPropsType) => {
   if (props.users.length === 0) {
-    props.setUsers([
-      {
-        id: 1,
-        followed: false,
-        fullName: "Dmitry S.N.",
-        status: "busy",
-        location: { city: "Houston", country: "USA" },
-        photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-      },
-      {
-        id: 2,
-        followed: false,
-        fullName: "Sasha S.N.",
-        status: "available",
-        location: { city: "Penza", country: "Russia" },
-        photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-      },
-      {
-        id: 3,
-        followed: true,
-        fullName: "Liza D.N",
-        status: "on vacation",
-        location: { city: "Moscow", country: "Russia" },
-        photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-      },
-    ]);
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((response) => {
+        props.setUsers(response.data.items);
+      });
   }
 
   return (
@@ -47,7 +26,7 @@ export const Users = (props: UsersPropsType) => {
         <div key={u.id}>
           <span className={style.userPhoto}>
             <div>
-              <img src={u.photo} />
+              <img src={u.photos.small != null ? u.photos.small : Cat} />
             </div>
             <div>
               {u.followed ? (
@@ -71,12 +50,12 @@ export const Users = (props: UsersPropsType) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
+              <div>{u.name}</div>
               <div>{u.status}</div>
             </span>
             <span>
-              <div>{u.location.city}</div>
-              <div>{u.location.country}</div>
+              <div>{"Hard code: u.location.city"}</div>
+              <div>{"Hard code: u.location.country"}</div>
             </span>
           </span>
         </div>
@@ -84,3 +63,34 @@ export const Users = (props: UsersPropsType) => {
     </div>
   );
 };
+
+/*
+props.setUsers([
+  {
+    id: 1,
+    followed: false,
+    fullName: "Dmitry S.N.",
+    status: "busy",
+    location: { city: "Houston", country: "USA" },
+    photo:
+        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+  },
+  {
+    id: 2,
+    followed: false,
+    fullName: "Sasha S.N.",
+    status: "available",
+    location: { city: "Penza", country: "Russia" },
+    photo:
+        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+  },
+  {
+    id: 3,
+    followed: true,
+    fullName: "Liza D.N",
+    status: "on vacation",
+    location: { city: "Moscow", country: "Russia" },
+    photo:
+        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+  },
+]);*/

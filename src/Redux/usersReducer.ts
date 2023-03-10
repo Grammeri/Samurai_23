@@ -1,8 +1,14 @@
-/*const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET-USERS";*/
+import {
+  AddNewDialogMessageType,
+  SendDialogMessageType,
+} from "./dialogReducer";
+import { AddPostActionType, UpdateNewPostActionType } from "./profileReducer";
 
-export type LocationType = {
+const FOLLOW = "FOLLOW";
+const UNFOLLOW = "UNFOLLOW";
+const SET_USERS = "SET-USERS";
+
+/*export type LocationType = {
   city: string;
   country: string;
 };
@@ -14,10 +20,20 @@ export type UserType = {
   status: string;
   location: LocationType;
   photo: any;
-};
+};*/
 
-export type UsersType = {
+/*export type UsersType = {
   users: Array<UserType>;
+};*/
+export type UserType = {
+  id: number;
+  name: string;
+  photos: {
+    small: any;
+    large: any;
+  };
+  status: string;
+  followed: false;
 };
 
 export let initialState: InitialStateType = {
@@ -52,15 +68,17 @@ export let initialState: InitialStateType = {
   ],
 };
 
-export type InitialStateType = UsersType;
+export type InitialStateType = {
+  users: Array<UserType>;
+};
 
 export let usersReducer = (
   state: InitialStateType = initialState,
   action: UsersReducerActionsTypes
 ): InitialStateType => {
   switch (action.type) {
-    case "FOLLOW":
-      return {
+    case FOLLOW:
+      return <InitialStateType>{
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.userId) {
@@ -69,7 +87,7 @@ export let usersReducer = (
           return u;
         }),
       };
-    case "UNFOLLOW":
+    case UNFOLLOW:
       return {
         ...state,
         users: state.users.map((u) => {
@@ -79,7 +97,7 @@ export let usersReducer = (
           return u;
         }),
       };
-    case "SET_USERS": {
+    case SET_USERS: {
       return { ...state, users: [...state.users, ...action.users] }; //склеиваем 2 массива
     }
 
@@ -89,16 +107,26 @@ export let usersReducer = (
 };
 
 export type FollowActionType = ReturnType<typeof followAC>;
-export const followAC = (userId: any) => ({ type: "FOLLOW", userId } as const);
+export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const);
 
 export type UnFollowActionType = ReturnType<typeof unFollowAC>;
-export const unFollowAC = (userId: any) =>
-  ({ type: "UNFOLLOW", userId } as const);
+export const unFollowAC = (userId: number) =>
+  ({ type: UNFOLLOW, userId } as const);
 
 export type SetUsersActionType = ReturnType<typeof setUsersAC>;
-export const setUsersAC = (users: any) => ({ type: "SET_USERS", users });
+export const setUsersAC = (users: Array<UserType>) =>
+  ({
+    type: SET_USERS,
+    users,
+  } as const);
 
 export type UsersReducerActionsTypes =
   | FollowActionType
   | UnFollowActionType
-  | SetUsersActionType;
+  | SetUsersActionType
+  | AddPostActionType
+  | UpdateNewPostActionType
+  | AddNewDialogMessageType
+  | SendDialogMessageType
+  | AddNewDialogMessageType
+  | SendDialogMessageType;

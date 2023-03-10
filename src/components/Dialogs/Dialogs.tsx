@@ -9,11 +9,11 @@ import {
 import { PostType } from "../../Redux/profileReducer";
 
 type DialogsPropsType = {
-  dispatch: (action: DialogsReducerActionsTypes) => void;
+  // dispatch: (action: DialogsReducerActionsTypes) => void;
   dialogsPage: MessagePageType;
   updateDialogsTextAreaText: any;
   sendMessage: () => void;
-  postsData: Array<PostType>;
+  // postsData: Array<PostType>;
 };
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
