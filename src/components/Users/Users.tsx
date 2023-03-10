@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import style from "./Users.module.css";
 import { UserType } from "../../Redux/usersReducer";
@@ -67,7 +68,7 @@ export const Users = (props: UsersPropsType) => {
   );
 };
 
-/*
+/!*
 props.setUsers([
   {
     id: 1,
@@ -96,4 +97,6 @@ props.setUsers([
     photo:
         "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
   },
-]);*/
+]);*!/
+*/
+export {};

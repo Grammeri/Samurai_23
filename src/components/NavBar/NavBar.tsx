@@ -8,10 +8,6 @@ type NavBarPropsType = {
   state: AppStateType;
 };
 
-/*type NavBarPropsType = {
-    state:RootStateType
-}*/
-
 export const NavBar = (props: NavBarPropsType) => {
   return (
     <div className={style.sideBar}>
@@ -23,6 +19,11 @@ export const NavBar = (props: NavBarPropsType) => {
       <div className={style.item}>
         <NavLink to={"/dialogs"} activeClassName={style.active}>
           Messages
+        </NavLink>
+      </div>
+      <div className={style.item}>
+        <NavLink to={"/users"} activeClassName={style.active}>
+          Users
         </NavLink>
       </div>
       <div className={style.item}>
