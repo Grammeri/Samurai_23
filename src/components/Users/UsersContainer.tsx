@@ -1,37 +1,36 @@
 import React from "react";
-import { AppStateType } from "../../Redux/reduxStore";
-import { Dispatch } from "redux";
-import { connect } from "react-redux";
+import {AppStateType} from "../../Redux/reduxStore";
+import {Dispatch} from "redux";
+import {connect} from "react-redux";
 import {
   followAC,
-  InitialStateType,
   setCurrentPageAC,
+  setTotalUsersCountAC,
   setUsersAC,
   unFollowAC,
   UserType,
 } from "../../Redux/usersReducer";
 import UsersClassComponent from "./UsersClassComponent";
 
-type MapStatePropsType = {
-  users: InitialStateType;
-};
-
-type mapDispatchToPropsType = {
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
-  setUsers: (users: Array<UserType>) => void;
-};
-
-export type UsersPropsType = MapStatePropsType & mapDispatchToPropsType;
-
-let mapStateToProps = (
-  state: AppStateType
-): {
+type MapStateToPropsType = {
   totalUsersCount: number;
   pageSize: number;
   currentPage: number;
   users: Array<UserType>;
-} => {
+}
+
+type mapDispatchToPropsType = {
+  setTotalUsersCount: (totalUsersCount: number) => void;
+  setUsers: (users: Array<UserType>) => void;
+  setCurrentPage: (pageNumber: number) => void;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
+}
+export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
+
+let mapStateToProps = (
+  state: AppStateType
+): MapStateToPropsType => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
@@ -42,12 +41,7 @@ let mapStateToProps = (
 
 let mapDispatchToProps = (
   dispatch: Dispatch
-): {
-  setUsers: (users: Array<UserType>) => void;
-  setCurrentPage: (pageNumber: number) => void;
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
-} => {
+): mapDispatchToPropsType => {
   return {
     follow: (userId: number) => {
       dispatch(followAC(userId));
@@ -60,6 +54,9 @@ let mapDispatchToProps = (
     },
     setCurrentPage: (pageNumber: number) => {
       dispatch(setCurrentPageAC(pageNumber));
+    },
+    setTotalUsersCount: (totalCount: number) => {
+      dispatch(setTotalUsersCountAC(totalCount));
     },
   };
 };

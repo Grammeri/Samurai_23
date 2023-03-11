@@ -1,7 +1,7 @@
 .userPhoto img {
   margin: 15px;
-  width: 20%;
-  height: 30%;
+  width: 60px;
+  height: 60px;
 }
 .selectedPage {
   font-weight: bold;

@@ -1,13 +1,8 @@
-import {
-  AddNewDialogMessageType,
-  SendDialogMessageType,
-} from "./dialogReducer";
-import { AddPostActionType, UpdateNewPostActionType } from "./profileReducer";
-
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 
 /*export type LocationType = {
   city: string;
@@ -47,8 +42,8 @@ export type InitialStateType = {
 export let initialState: InitialStateType = {
   users: [],
   pageSize: 5,
-  totalUsersCount: 21,
-  currentPage: 2,
+  totalUsersCount: 0,
+  currentPage: 1,
 };
 
 export let usersReducer = (
@@ -77,10 +72,13 @@ export let usersReducer = (
         }),
       };
     case SET_USERS: {
-      return { ...state, users: [...state.users, ...action.users] }; //склеиваем 2 массива
+      return { ...state, users: [...action.users, /*...state.users*/] }; //склеиваем 2 массива
     }
     case SET_CURRENT_PAGE: {
       return { ...state, currentPage: action.currentPage };
+    }
+    case SET_TOTAL_USERS_COUNT: {
+      return { ...state, totalUsersCount: action.count };
     }
     default:
       return state;
@@ -108,11 +106,19 @@ export const setCurrentPageAC = (currentPage: number) =>
     currentPage,
   } as const);
 
+export type TotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>;
+export const setTotalUsersCountAC = (totalUsersCount: number) =>
+  ({
+    type: SET_TOTAL_USERS_COUNT,
+    count: totalUsersCount,
+  } as const);
+
 export type UsersReducerActionsTypes =
   | FollowActionType
   | UnFollowActionType
   | SetUsersActionType
-  | CurrentPageActionType;
+  | CurrentPageActionType
+  | TotalUsersCountActionType;
 
 /*
 export let initialState: InitialStateType = {

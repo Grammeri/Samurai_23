@@ -13,6 +13,7 @@ export type UsersPropsType = {
   pageSize: number;
   currentPage: number;
   setCurrentPage: (pageNumber: number) => void;
+  setTotalUsersCount: (totalCount: number) => void;
 };
 
 class UsersClassComponent extends React.Component<UsersPropsType, []> {
@@ -44,8 +45,20 @@ class UsersClassComponent extends React.Component<UsersPropsType, []> {
       )
       .then((response) => {
         this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
       });
   }
+
+  onPageChange = (pageNumber: number) => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
+  };
 
   render() {
     let pagesCount = Math.ceil(
@@ -62,12 +75,12 @@ class UsersClassComponent extends React.Component<UsersPropsType, []> {
           {pages.map((page) => {
             return (
               <span
-                onClick={() => {
-                  this.props.setCurrentPage(page);
-                }}
                 className={
-                  this.props.currentPage === page && style.selectedPage
+                  this.props.currentPage === page ? style.selectedPage : ""
                 }
+                onClick={(e) => {
+                  this.onPageChange(page);
+                }}
               >
                 {page}
               </span>
