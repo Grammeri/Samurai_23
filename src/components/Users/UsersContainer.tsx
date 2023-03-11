@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   followAC,
   InitialStateType,
+  setCurrentPageAC,
   setUsersAC,
   unFollowAC,
   UserType,
@@ -23,13 +24,30 @@ type mapDispatchToPropsType = {
 
 export type UsersPropsType = MapStatePropsType & mapDispatchToPropsType;
 
-let mapStateToProps = (state: AppStateType): { users: Array<UserType> } => {
+let mapStateToProps = (
+  state: AppStateType
+): {
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  users: Array<UserType>;
+} => {
   return {
     users: state.usersPage.users,
+    pageSize: state.usersPage.pageSize,
+    totalUsersCount: state.usersPage.totalUsersCount,
+    currentPage: state.usersPage.currentPage,
   };
 };
 
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+let mapDispatchToProps = (
+  dispatch: Dispatch
+): {
+  setUsers: (users: Array<UserType>) => void;
+  setCurrentPage: (pageNumber: number) => void;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
+} => {
   return {
     follow: (userId: number) => {
       dispatch(followAC(userId));
@@ -40,10 +58,12 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     setUsers: (users: Array<UserType>) => {
       dispatch(setUsersAC(users));
     },
+    setCurrentPage: (pageNumber: number) => {
+      dispatch(setCurrentPageAC(pageNumber));
+    },
   };
 };
 
-// @ts-ignore
 const UsersContainer = connect(
   mapStateToProps,
   mapDispatchToProps

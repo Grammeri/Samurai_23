@@ -9,32 +9,71 @@ export type UsersPropsType = {
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   setUsers: (users: Array<UserType>) => void;
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  setCurrentPage: (pageNumber: number) => void;
 };
 
 class UsersClassComponent extends React.Component<UsersPropsType, []> {
-  constructor(props: UsersPropsType) {
+  /*  constructor(props: UsersPropsType) {
     super(props); //передаем конструирование родительской компоненте React.Component
-    /*if (this.props.users.length === 0) {*/
-    alert("New!!!"); //Создаля новый объект, потом реакт обращается к этому обдъекту и просит у него JSX
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-      });
-    /* }*/
-  }
-  getUsers = () => {
-    /*    if (this.props.users.length === 0) {
+    if (this.props.users.length === 0) {
+      alert("New!!!"); //Создаля новый объект, потом реакт обращается к этому обдъекту и просит у него JSX
       axios
         .get("https://social-network.samuraijs.com/api/1.0/users")
         .then((response) => {
           this.props.setUsers(response.data.items);
         });
-    }*/
-  };
+    }
+  }*/
+  /*  getUsers = () => {
+        if (this.props.users.length === 0) {
+      axios
+        .get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((response) => {
+          this.props.setUsers(response.data.items);
+        });
+    }
+  };*/
+
+  componentDidMount() {
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((response) => {
+        this.props.setUsers(response.data.items);
+      });
+  }
+
   render() {
+    let pagesCount = Math.ceil(
+      this.props.totalUsersCount / this.props.pageSize
+    );
+    //Создаем массив
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
     return (
       <div>
+        <div>
+          {pages.map((page) => {
+            return (
+              <span
+                onClick={() => {
+                  this.props.setCurrentPage(page);
+                }}
+                className={
+                  this.props.currentPage === page && style.selectedPage
+                }
+              >
+                {page}
+              </span>
+            );
+          })}
+        </div>
         {/*<button onClick={this.getUsers}>Get Users</button>*/}
         {this.props.users.map((u: any) => (
           <div key={u.id}>

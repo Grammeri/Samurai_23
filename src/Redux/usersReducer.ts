@@ -7,6 +7,7 @@ import { AddPostActionType, UpdateNewPostActionType } from "./profileReducer";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
+const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 
 /*export type LocationType = {
   city: string;
@@ -33,43 +34,21 @@ export type UserType = {
     large: any;
   };
   status: string;
-  followed: false;
-};
-
-export let initialState: InitialStateType = {
-  users: [
-    /*    {
-      id: 1,
-      followed: false,
-      fullName: "Dmitry S.N.",
-      status: "busy",
-      location: { city: "Houston", country: "USA" },
-      photo:
-        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },
-    {
-      id: 2,
-      followed: false,
-      fullName: "Sasha S.N.",
-      status: "available",
-      location: { city: "Penza", country: "Russia" },
-      photo:
-        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },
-    {
-      id: 3,
-      followed: true,
-      fullName: "Liza D.N",
-      status: "on vacation",
-      location: { city: "Moscow", country: "Russia" },
-      photo:
-        "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },*/
-  ],
+  followed: boolean;
 };
 
 export type InitialStateType = {
   users: Array<UserType>;
+  pageSize: number;
+  totalUsersCount: number;
+  currentPage: number;
+};
+
+export let initialState: InitialStateType = {
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 21,
+  currentPage: 2,
 };
 
 export let usersReducer = (
@@ -100,7 +79,9 @@ export let usersReducer = (
     case SET_USERS: {
       return { ...state, users: [...state.users, ...action.users] }; //склеиваем 2 массива
     }
-
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.currentPage };
+    }
     default:
       return state;
   }
@@ -120,13 +101,48 @@ export const setUsersAC = (users: Array<UserType>) =>
     users,
   } as const);
 
+export type CurrentPageActionType = ReturnType<typeof setCurrentPageAC>;
+export const setCurrentPageAC = (currentPage: number) =>
+  ({
+    type: SET_CURRENT_PAGE,
+    currentPage,
+  } as const);
+
 export type UsersReducerActionsTypes =
   | FollowActionType
   | UnFollowActionType
   | SetUsersActionType
-  | AddPostActionType
-  | UpdateNewPostActionType
-  | AddNewDialogMessageType
-  | SendDialogMessageType
-  | AddNewDialogMessageType
-  | SendDialogMessageType;
+  | CurrentPageActionType;
+
+/*
+export let initialState: InitialStateType = {
+  users: [
+    {
+      id: 1,
+      followed: false,
+      fullName: "Dmitry S.N.",
+      status: "busy",
+      location: { city: "Houston", country: "USA" },
+      photo:
+          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+    },
+    {
+      id: 2,
+      followed: false,
+      fullName: "Sasha S.N.",
+      status: "available",
+      location: { city: "Penza", country: "Russia" },
+      photo:
+          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+    },
+    {
+      id: 3,
+      followed: true,
+      fullName: "Liza D.N",
+      status: "on vacation",
+      location: { city: "Moscow", country: "Russia" },
+      photo:
+          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
+    },
+  ],
+};*/
