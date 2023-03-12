@@ -14,6 +14,8 @@ export type UsersPropsType = {
   setCurrentPage: (pageNumber: number) => void;
   setTotalUsersCount: (totalCount: number) => void;
   onPageChange: (page: number) => void;
+  isFetching: boolean;
+  setPreloader: (isFetching: boolean) => void;
 };
 
 const Users = (props: UsersPropsType) => {

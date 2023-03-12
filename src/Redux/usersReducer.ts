@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const SET_PRELOADER = "SET-PRELOADER";
 
 /*export type LocationType = {
   city: string;
@@ -37,6 +38,7 @@ export type InitialStateType = {
   pageSize: number;
   totalUsersCount: number;
   currentPage: number;
+  isFetching: boolean;
 };
 
 export let initialState: InitialStateType = {
@@ -44,6 +46,7 @@ export let initialState: InitialStateType = {
   pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
+  isFetching: true,
 };
 
 export let usersReducer = (
@@ -72,13 +75,16 @@ export let usersReducer = (
         }),
       };
     case SET_USERS: {
-      return { ...state, users: [...action.users, /*...state.users*/] }; //склеиваем 2 массива
+      return { ...state, users: [...action.users /*...state.users*/] }; //склеиваем 2 массива
     }
     case SET_CURRENT_PAGE: {
       return { ...state, currentPage: action.currentPage };
     }
     case SET_TOTAL_USERS_COUNT: {
       return { ...state, totalUsersCount: action.count };
+    }
+    case SET_PRELOADER: {
+      return { ...state, isFetching: action.isFetching };
     }
     default:
       return state;
@@ -113,12 +119,20 @@ export const setTotalUsersCountAC = (totalUsersCount: number) =>
     count: totalUsersCount,
   } as const);
 
+export type setPreloaderActionType = ReturnType<typeof setPreLoadingAC>;
+export const setPreLoadingAC = (isFetching: boolean) =>
+  ({
+    type: SET_PRELOADER,
+    isFetching,
+  } as const);
+
 export type UsersReducerActionsTypes =
   | FollowActionType
   | UnFollowActionType
   | SetUsersActionType
   | CurrentPageActionType
-  | TotalUsersCountActionType;
+  | TotalUsersCountActionType
+  | setPreloaderActionType;
 
 /*
 export let initialState: InitialStateType = {
