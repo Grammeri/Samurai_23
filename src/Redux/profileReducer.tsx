@@ -23,10 +23,31 @@ export type PostType = {
   likesCount: number;
 };
 
+export type ProfileType = {
+  userId: number;
+  lookingForAJob: boolean;
+  lookingForAJobDescription: string;
+  fullName: string;
+  contacts: {
+    github: string;
+    vk: string;
+    instagram: string;
+    twitter: string;
+    website: string;
+    youtube: string;
+    mainLink: string;
+    null: string;
+  };
+  photos: {
+    small: string;
+    large: string;
+  };
+};
+
 export type ProfilePageType = {
   postsData: Array<PostType>;
   newPostText: string;
-  profile: any;
+  profile: ProfileType | null;
 };
 
 export type InitialStateType = ProfilePageType;
@@ -85,7 +106,7 @@ export const UpdateNewPostActionCreator = (
 };
 
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>;
-export const setUserProfile = (profile: any) =>
+export const setUserProfile = (profile: ProfileType) =>
   ({ type: SET_USER_PROFILE, profile } as const);
 
 export type ActionsTypes =

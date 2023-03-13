@@ -11,7 +11,7 @@ import { PostType } from "../../Redux/profileReducer";
 type DialogsPropsType = {
   // dispatch: (action: DialogsReducerActionsTypes) => void;
   dialogsPage: MessagePageType;
-  updateDialogsTextAreaText: any;
+  updateDialogsTextAreaText: (text: string) => void;
   sendMessage: () => void;
   // postsData: Array<PostType>;
 };

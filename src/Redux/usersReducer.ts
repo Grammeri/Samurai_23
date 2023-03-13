@@ -26,8 +26,8 @@ export type UserType = {
   id: number;
   name: string;
   photos: {
-    small: any;
-    large: any;
+    small: string;
+    large: string;
   };
   status: string;
   followed: boolean;

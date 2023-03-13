@@ -2,6 +2,7 @@ import React from "react";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import style from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import { ProfileType } from "../../Redux/profileReducer";
 
 /*type ProfilePropsType = {
   profilePage: ProfilePageType;
@@ -10,13 +11,13 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 };*/
 
 type ProfilePropsType = {
-    profile:any
-}
+  profile: ProfileType;
+};
 
-export const Profile = (props:ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
   return (
     <div className={style.profile}>
-      <ProfileInfo profile={props.profile}/>
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer
       //profilePage={props.profilePage}
       //newPostText={props.profilePage.newPostText}
