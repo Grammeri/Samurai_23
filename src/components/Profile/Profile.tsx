@@ -9,10 +9,14 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
   store: any;
 };*/
 
-export const Profile: React.FC /*<ProfilePropsType>*/ = () => {
+type ProfilePropsType = {
+    profile:any
+}
+
+export const Profile = (props:ProfilePropsType) => {
   return (
     <div className={style.profile}>
-      <ProfileInfo />
+      <ProfileInfo profile={props.profile}/>
       <MyPostsContainer
       //profilePage={props.profilePage}
       //newPostText={props.profilePage.newPostText}

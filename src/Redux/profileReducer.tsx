@@ -5,6 +5,7 @@ import {
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET-USER-PROFILE";
 
 /*export type MessageType = {
   id: number;
@@ -25,6 +26,7 @@ export type PostType = {
 export type ProfilePageType = {
   postsData: Array<PostType>;
   newPostText: string;
+  profile: any;
 };
 
 export type InitialStateType = ProfilePageType;
@@ -35,6 +37,7 @@ export let initialState: InitialStateType = {
     { id: 2, message: "I am good!", likesCount: 20 },
   ],
   newPostText: "NewPostText",
+  profile: null,
 };
 
 export let profileReducer = (
@@ -56,6 +59,9 @@ export let profileReducer = (
       //let stateCopy = { ...state, newPostText: action.newText };
       return { ...state, newPostText: action.newText };
     }
+    case SET_USER_PROFILE: {
+      return { ...state, profile: action.profile };
+    }
     default:
       return state;
   }
@@ -63,6 +69,11 @@ export let profileReducer = (
 
 export type AddPostActionType = ReturnType<typeof AddPostActionCreator>;
 export const AddPostActionCreator = () => ({ type: ADD_POST } as const);
+
+export type UpdateNewPostActionType = {
+  type: "UPDATE-NEW-POST-TEXT";
+  newText: string;
+};
 
 export const UpdateNewPostActionCreator = (
   newPost: string
@@ -73,13 +84,13 @@ export const UpdateNewPostActionCreator = (
   };
 };
 
-export type UpdateNewPostActionType = {
-  type: "UPDATE-NEW-POST-TEXT";
-  newText: string;
-};
+export type setUserProfileActionType = ReturnType<typeof setUserProfile>;
+export const setUserProfile = (profile: any) =>
+  ({ type: SET_USER_PROFILE, profile } as const);
 
 export type ActionsTypes =
   | AddPostActionType
   | UpdateNewPostActionType
   | AddNewDialogMessageType
-  | SendDialogMessageType;
+  | SendDialogMessageType
+  | setUserProfileActionType;

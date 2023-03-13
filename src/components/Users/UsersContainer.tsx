@@ -1,15 +1,14 @@
 import React from "react";
-import { AppStateType } from "../../Redux/reduxStore";
-import { Dispatch } from "redux";
-import { connect } from "react-redux";
+import {AppStateType} from "../../Redux/reduxStore";
+import {connect} from "react-redux";
 
 import {
-  followAC,
-  setCurrentPageAC,
-  setPreLoadingAC,
-  setTotalUsersCountAC,
-  setUsersAC,
-  unFollowAC,
+  follow,
+  setCurrentPage,
+  setPreloader,
+  setTotalUsersCount,
+  setUsers,
+  unfollow,
   UserType,
 } from "../../Redux/usersReducer";
 import axios from "axios";
@@ -63,10 +62,9 @@ export class UsersComponent extends React.Component<UsersPropsType, []> {
   };
 
   render() {
-    return (
-      <div>
+    return <div>
         {this.props.isFetching ? (
-          <Preloader isFetching={this.props.isFetching} />
+          <Preloader /*isFetching={this.props.isFetching}*/ />
         ) : null}
         <Users
           totalUsersCount={this.props.totalUsersCount}
@@ -83,7 +81,6 @@ export class UsersComponent extends React.Component<UsersPropsType, []> {
           setPreloader={this.props.setPreloader}
         />
       </div>
-    );
   }
 }
 
@@ -97,7 +94,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   };
 };
 
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
   return {
     follow: (userId: number) => {
       dispatch(followAC(userId));
@@ -118,6 +115,13 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
       dispatch(setPreLoadingAC(isFetching));
     },
   };
-};
+};*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersComponent);
+export default connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setCurrentPage,
+  setTotalUsersCount,
+  setPreloader,
+})(UsersComponent);

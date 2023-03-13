@@ -39,6 +39,7 @@ export type InitialStateType = {
   totalUsersCount: number;
   currentPage: number;
   isFetching: boolean;
+  //followed: boolean;
 };
 
 export let initialState: InitialStateType = {
@@ -47,6 +48,7 @@ export let initialState: InitialStateType = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: true,
+  //followed: false,
 };
 
 export let usersReducer = (
@@ -91,36 +93,36 @@ export let usersReducer = (
   }
 };
 
-export type FollowActionType = ReturnType<typeof followAC>;
-export const followAC = (userId: number) => ({ type: FOLLOW, userId } as const);
+export type FollowActionType = ReturnType<typeof follow>;
+export const follow = (userId: number) => ({ type: FOLLOW, userId } as const);
 
-export type UnFollowActionType = ReturnType<typeof unFollowAC>;
-export const unFollowAC = (userId: number) =>
+export type UnFollowActionType = ReturnType<typeof unfollow>;
+export const unfollow = (userId: number) =>
   ({ type: UNFOLLOW, userId } as const);
 
-export type SetUsersActionType = ReturnType<typeof setUsersAC>;
-export const setUsersAC = (users: Array<UserType>) =>
+export type SetUsersActionType = ReturnType<typeof setUsers>;
+export const setUsers = (users: Array<UserType>) =>
   ({
     type: SET_USERS,
     users,
   } as const);
 
-export type CurrentPageActionType = ReturnType<typeof setCurrentPageAC>;
-export const setCurrentPageAC = (currentPage: number) =>
+export type CurrentPageActionType = ReturnType<typeof setCurrentPage>;
+export const setCurrentPage = (currentPage: number) =>
   ({
     type: SET_CURRENT_PAGE,
     currentPage,
   } as const);
 
-export type TotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>;
-export const setTotalUsersCountAC = (totalUsersCount: number) =>
+export type TotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>;
+export const setTotalUsersCount = (totalUsersCount: number) =>
   ({
     type: SET_TOTAL_USERS_COUNT,
     count: totalUsersCount,
   } as const);
 
-export type setPreloaderActionType = ReturnType<typeof setPreLoadingAC>;
-export const setPreLoadingAC = (isFetching: boolean) =>
+export type setPreloaderActionType = ReturnType<typeof setPreloader>;
+export const setPreloader = (isFetching: boolean) =>
   ({
     type: SET_PRELOADER,
     isFetching,

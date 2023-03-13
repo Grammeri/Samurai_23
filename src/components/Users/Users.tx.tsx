@@ -2,6 +2,7 @@ import React from "react";
 import { UserType } from "../../Redux/usersReducer";
 import style from "./Users.module.css";
 import Cat from "./../../assets/cat.jpg";
+import {NavLink} from "react-router-dom";
 
 export type UsersPropsType = {
   users: Array<UserType>;
@@ -46,7 +47,12 @@ const Users = (props: UsersPropsType) => {
           <div key={u.id}>
             <span className={style.userPhoto}>
               <div>
-                <img src={u.photos.small != null ? u.photos.small : Cat} />
+                {/* eslint-disable-next-line react/jsx-no-undef */}
+                <NavLink to={"/profile/" + u.id}>
+                  <img src={u.photos.small != null ? u.photos.small : Cat} />
+
+                </NavLink>
+
               </div>
               <div>
                 {u.followed ? (
@@ -81,7 +87,7 @@ const Users = (props: UsersPropsType) => {
           </div>
         ))}
       </div>
-      );
+
     </div>
   );
 };
