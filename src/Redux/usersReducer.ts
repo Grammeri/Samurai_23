@@ -23,7 +23,7 @@ export type UserType = {
   users: Array<UserType>;
 };*/
 export type UserType = {
-  id: number;
+  id: string;
   name: string;
   photos: {
     small: string;
@@ -94,10 +94,10 @@ export let usersReducer = (
 };
 
 export type FollowActionType = ReturnType<typeof follow>;
-export const follow = (userId: number) => ({ type: FOLLOW, userId } as const);
+export const follow = (userId: string) => ({ type: FOLLOW, userId } as const);
 
 export type UnFollowActionType = ReturnType<typeof unfollow>;
-export const unfollow = (userId: number) =>
+export const unfollow = (userId: string) =>
   ({ type: UNFOLLOW, userId } as const);
 
 export type SetUsersActionType = ReturnType<typeof setUsers>;

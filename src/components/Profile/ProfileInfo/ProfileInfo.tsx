@@ -2,9 +2,10 @@ import React from "react";
 import Village from "./../../../assets/village.jpg";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../Preloader/Preloader";
+import { ProfileType } from "../../../Redux/profileReducer";
 
 type ProfileInfoType = {
-  profile: any;
+  profile: ProfileType | null;
 };
 
 export const ProfileInfo = (props: ProfileInfoType) => {

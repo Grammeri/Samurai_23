@@ -7,8 +7,8 @@ import Cat from "./../../assets/cat.jpg";
 
 export type UsersPropsType = {
   users: Array<UserType>;
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
+  follow: (userId: string) => void;
+  unfollow: (userId: string) => void;
   setUsers: (users: Array<UserType>) => void;
 };
 

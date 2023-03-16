@@ -1,6 +1,6 @@
 import React from "react";
-import {AppStateType} from "../../Redux/reduxStore";
-import {connect} from "react-redux";
+import { AppStateType } from "../../Redux/reduxStore";
+import { connect } from "react-redux";
 
 import {
   follow,
@@ -27,8 +27,8 @@ type mapDispatchToPropsType = {
   setTotalUsersCount: (totalUsersCount: number) => void;
   setUsers: (users: Array<UserType>) => void;
   setCurrentPage: (pageNumber: number) => void;
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
+  follow: (userId: string) => void;
+  unfollow: (userId: string) => void;
   setPreloader: (isFetching: boolean) => void;
 };
 
@@ -62,7 +62,8 @@ export class UsersComponent extends React.Component<UsersPropsType, []> {
   };
 
   render() {
-    return <div>
+    return (
+      <div>
         {this.props.isFetching ? (
           <Preloader /*isFetching={this.props.isFetching}*/ />
         ) : null}
@@ -81,6 +82,7 @@ export class UsersComponent extends React.Component<UsersPropsType, []> {
           setPreloader={this.props.setPreloader}
         />
       </div>
+    );
   }
 }
 
@@ -96,10 +98,10 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 /*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
   return {
-    follow: (userId: number) => {
+    follow: (userId: string) => {
       dispatch(followAC(userId));
     },
-    unfollow: (userId: number) => {
+    unfollow: (userId: string) => {
       dispatch(unFollowAC(userId));
     },
     setUsers: (users: Array<UserType>) => {

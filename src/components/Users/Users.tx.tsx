@@ -2,12 +2,12 @@ import React from "react";
 import { UserType } from "../../Redux/usersReducer";
 import style from "./Users.module.css";
 import Cat from "./../../assets/cat.jpg";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export type UsersPropsType = {
   users: Array<UserType>;
-  follow: (userId: number) => void;
-  unfollow: (userId: number) => void;
+  follow: (userId: string) => void;
+  unfollow: (userId: string) => void;
   setUsers: (users: Array<UserType>) => void;
   totalUsersCount: number;
   pageSize: number;
@@ -50,9 +50,7 @@ const Users = (props: UsersPropsType) => {
                 {/* eslint-disable-next-line react/jsx-no-undef */}
                 <NavLink to={"/profile/" + u.id}>
                   <img src={u.photos.small != null ? u.photos.small : Cat} />
-
                 </NavLink>
-
               </div>
               <div>
                 {u.followed ? (
@@ -87,7 +85,6 @@ const Users = (props: UsersPropsType) => {
           </div>
         ))}
       </div>
-
     </div>
   );
 };

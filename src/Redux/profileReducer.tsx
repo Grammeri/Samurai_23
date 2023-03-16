@@ -24,7 +24,7 @@ export type PostType = {
 };
 
 export type ProfileType = {
-  userId: number;
+  userId: string;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
@@ -36,6 +36,7 @@ export type ProfileType = {
     website: string;
     youtube: string;
     mainLink: string;
+    facebook: string;
     null: string;
   };
   photos: {
