@@ -4,6 +4,7 @@ import style from "./Users.module.css";
 import Cat from "./../../assets/cat.jpg";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     users: Array<UserType>;
@@ -57,28 +58,28 @@ const Users = (props: UsersPropsType) => {
                 {u.followed
                     ? (<button onClick={() => {
 
-                        axios
+                        /*axios
                             .delete(
                                 `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials: true,
                                     headers:{"API-KEY" : "b32b3a07-7742-4225-abe5-a0ff18d69199"}
                                 }
-                            )
-                            .then((response) => {
+                            )*/
+                            usersAPI.deleteFollow(u.id).then((response) => {
                                 if (response.data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
                             });
                     }}>Unfollow</button>)
                     : (<button onClick={() => {
-                        axios
+/*                        axios
                             .post(
                                 `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                     withCredentials: true,
                                     headers:{"API-KEY" : "b32b3a07-7742-4225-abe5-a0ff18d69199"}
                                 }
-                            )
-                            .then((response) => {
+                            )*/
+                            usersAPI.postFollow(u.id).then((response) => {
                                 if (response.data.resultCode === 0) {
                                     props.follow(u.id)
                                 }
