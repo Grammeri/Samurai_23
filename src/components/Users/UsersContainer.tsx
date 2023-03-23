@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {
   follow,
   setCurrentPage,
+  toggleFollowingProgress,
   setPreloader,
   setTotalUsersCount,
   setUsers,
@@ -21,6 +22,7 @@ type MapStateToPropsType = {
   currentPage: number;
   users: Array<UserType>;
   isFetching: boolean;
+  followingInProgress:[]
 };
 
 type mapDispatchToPropsType = {
@@ -29,7 +31,8 @@ type mapDispatchToPropsType = {
   setCurrentPage: (pageNumber: number) => void;
   follow: (userId: string) => void;
   unfollow: (userId: string) => void;
-  setPreloader: (isFetching: boolean) => void;
+  setPreloader: (isFetching: boolean) => void,
+  toggleFollowingProgress:(Array:any, userId:number)=>void
 };
 
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
@@ -77,24 +80,27 @@ usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
           users={this.props.users}
           follow={this.props.follow}
           unfollow={this.props.unfollow}
-          setCurrentPage={this.props.setCurrentPage}
-          setTotalUsersCount={this.props.setTotalUsersCount}
-          setUsers={this.props.setUsers}
-          isFetching={this.props.isFetching}
-          setPreloader={this.props.setPreloader}
+          //setCurrentPage={this.props.setCurrentPage}
+          //setTotalUsersCount={this.props.setTotalUsersCount}
+          //setUsers={this.props.setUsers}
+          //isFetching={this.props.isFetching}
+          //setPreloader={this.props.setPreloader}
+          toggleFollowingProgress={this.props.toggleFollowingProgress}
+          followingInProgress={this.props.followingInProgress}
         />
       </div>
     );
   }
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+let mapStateToProps = (state: AppStateType): { followingInProgress: Array<any>; totalUsersCount: number; pageSize: number; isFetching: boolean; currentPage: number; users: Array<UserType> } => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgres
   };
 };
 
@@ -128,4 +134,5 @@ export default connect(mapStateToProps, {
   setCurrentPage,
   setTotalUsersCount,
   setPreloader,
+  toggleFollowingProgress
 })(UsersComponent);

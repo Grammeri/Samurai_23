@@ -4,6 +4,7 @@ const SET_USERS = "SET-USERS";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SET_PRELOADER = "SET-PRELOADER";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS-FOLLOWING-PROGRESS";
 
 /*export type LocationType = {
   city: string;
@@ -23,37 +24,37 @@ export type UserType = {
   users: Array<UserType>;
 };*/
 export type UserType = {
-  id: string;
-  name: string;
-  photos: {
-    small: string;
-    large: string;
-  };
-  status: string;
-  followed: boolean;
+    id: string;
+    name: string;
+    photos: {
+        small: string;
+        large: string;
+    };
+    status: string;
+    followed: boolean;
 };
 
 export type InitialStateType = {
-  users: Array<UserType>;
-  pageSize: number;
-  totalUsersCount: number;
-  currentPage: number;
-  isFetching: boolean;
-  //followed: boolean;
+    users: Array<UserType>;
+    pageSize: number;
+    totalUsersCount: number;
+    currentPage: number;
+    isFetching: boolean;
+    followingInProgres: Array<any>;
 };
 
 export let initialState: InitialStateType = {
-  users: [],
-  pageSize: 5,
-  totalUsersCount: 0,
-  currentPage: 1,
-  isFetching: true,
-  //followed: false,
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    followingInProgres: [], //id of the user to be followed/unfollowed
 };
 
 export let usersReducer = (
-  state: InitialStateType = initialState,
-  action: UsersReducerActionsTypes
+    state: InitialStateType = initialState,
+    action: UsersReducerActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case FOLLOW:
@@ -88,83 +89,67 @@ export let usersReducer = (
     case SET_PRELOADER: {
       return { ...state, isFetching: action.isFetching };
     }
+      case TOGGLE_IS_FOLLOWING_PROGRESS: {
+          return {
+              ...state,
+              followingInProgres: action.isFetching
+                  ? [...state.followingInProgres, action.userId]
+                  : state.followingInProgres.filter(id => id != action.userId)};
+      }
     default:
       return state;
   }
 };
 
 export type FollowActionType = ReturnType<typeof follow>;
-export const follow = (userId: string) => ({ type: FOLLOW, userId } as const);
+export const follow = (userId: string) => ({type: FOLLOW, userId} as const);
 
 export type UnFollowActionType = ReturnType<typeof unfollow>;
 export const unfollow = (userId: string) =>
-  ({ type: UNFOLLOW, userId } as const);
+    ({type: UNFOLLOW, userId} as const);
 
 export type SetUsersActionType = ReturnType<typeof setUsers>;
 export const setUsers = (users: Array<UserType>) =>
-  ({
-    type: SET_USERS,
-    users,
-  } as const);
+    ({
+        type: SET_USERS,
+        users,
+    } as const);
 
 export type CurrentPageActionType = ReturnType<typeof setCurrentPage>;
 export const setCurrentPage = (currentPage: number) =>
-  ({
-    type: SET_CURRENT_PAGE,
-    currentPage,
-  } as const);
+    ({
+        type: SET_CURRENT_PAGE,
+        currentPage,
+    } as const);
 
 export type TotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>;
 export const setTotalUsersCount = (totalUsersCount: number) =>
-  ({
-    type: SET_TOTAL_USERS_COUNT,
-    count: totalUsersCount,
-  } as const);
+    ({
+        type: SET_TOTAL_USERS_COUNT,
+        count: totalUsersCount,
+    } as const);
 
 export type setPreloaderActionType = ReturnType<typeof setPreloader>;
 export const setPreloader = (isFetching: boolean) =>
-  ({
-    type: SET_PRELOADER,
-    isFetching,
-  } as const);
+    ({
+        type: SET_PRELOADER,
+        isFetching,
+    } as const);
+
+export type followingInProgressActionType = ReturnType<typeof toggleFollowingProgress>;
+export const toggleFollowingProgress = (isFetching: boolean, userId:number) =>
+    ({
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        isFetching,
+        userId
+    } as const);
 
 export type UsersReducerActionsTypes =
-  | FollowActionType
-  | UnFollowActionType
-  | SetUsersActionType
-  | CurrentPageActionType
-  | TotalUsersCountActionType
-  | setPreloaderActionType;
+    | FollowActionType
+    | UnFollowActionType
+    | SetUsersActionType
+    | CurrentPageActionType
+    | TotalUsersCountActionType
+    | setPreloaderActionType
+    | followingInProgressActionType
 
-/*
-export let initialState: InitialStateType = {
-  users: [
-    {
-      id: 1,
-      followed: false,
-      fullName: "Dmitry S.N.",
-      status: "busy",
-      location: { city: "Houston", country: "USA" },
-      photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },
-    {
-      id: 2,
-      followed: false,
-      fullName: "Sasha S.N.",
-      status: "available",
-      location: { city: "Penza", country: "Russia" },
-      photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },
-    {
-      id: 3,
-      followed: true,
-      fullName: "Liza D.N",
-      status: "on vacation",
-      location: { city: "Moscow", country: "Russia" },
-      photo:
-          "https://cdn.dribbble.com/users/3269914/screenshots/10847556/cat-with-a-piece-of-sausage_2x.jpg",
-    },
-  ],
-};*/
