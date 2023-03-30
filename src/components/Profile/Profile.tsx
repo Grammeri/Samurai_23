@@ -15,6 +15,7 @@ type ProfilePropsType = {
 };
 
 export const Profile = (props: ProfilePropsType) => {
+  //debugger;
   return (
     <div className={style.profile}>
       <ProfileInfo profile={props.profile} />

@@ -1,12 +1,10 @@
 import React from "react";
-import {Profile} from "./Profile";
-import {connect} from "react-redux";
-import {AppStateType} from "../../Redux/reduxStore";
-import {getProfile, ProfileType} from "../../Redux/profileReducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
-
+import { Profile } from "./Profile";
+import { connect } from "react-redux";
+import { AppStateType } from "../../Redux/reduxStore";
+import { getProfile, ProfileType } from "../../Redux/profileReducer";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { compose } from "redux";
 
 type PathParamsType = {
   userId: any;
@@ -16,12 +14,12 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType;
 
 type MapDispatchToPropsType = {
   //setUserProfile: (profile: ProfileType) => void;
-  getProfile:any
+  getProfile: any;
 };
 
 type MapStateToPropsType = {
   profile: ProfileType | null;
-  isAuth:boolean
+  //isAuth: boolean;
 };
 
 type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType;
@@ -33,18 +31,10 @@ class ProfileContainer extends React.Component<PropsType> {
     if (!userId) {
       userId = 2;
     }
-    this.props.getProfile(userId)
-/*    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)*/
-/*      usersAPI.getProfile(userId).then((response) => {
-        this.props.setUserProfile(response.data);
-      });*/
+    this.props.getProfile(userId);
   }
 
   render() {
- /*   if(!this.props.isAuth){
-      return <Redirect to={"/login"}/>
-    }*/
     return (
       <div>
         <Profile {...this.props} profile={this.props.profile} />
@@ -53,28 +43,13 @@ class ProfileContainer extends React.Component<PropsType> {
   }
 }
 
-/*export type AuthRedirectComponentPropsType = {
-
-}
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)*/
-
-/*let mapStateToPropsForRedirect = (state: AppStateType): { isAuth: boolean } => ({
-  isAuth: state.auth.isAuth
-});
-
-AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent)*/
-
-
-
-
-let mapStateToProps = (state: AppStateType): { profile: ProfileType | null } => ({
+let mapStateToProps = (
+  state: AppStateType
+): { profile: ProfileType | null } => ({
   profile: state.profilePage.profile,
-
 });
 
-/*let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
-
-export default connect(mapStateToProps, { /!*setUserProfile *!/getProfile})(
-  WithUrlDataContainerComponent
-);*/
-export default compose (connect(mapStateToProps, { /*setUserProfile */getProfile}), withRouter, withAuthRedirect)(ProfileContainer);
+export default compose<React.ComponentType>(
+  connect(mapStateToProps, { getProfile }),
+  withRouter
+)(ProfileContainer);
