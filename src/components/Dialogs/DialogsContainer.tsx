@@ -17,6 +17,7 @@ import { AppStateType } from "../../Redux/reduxStore";
 let mapStateToProps = (state: AppStateType) => {
   return {
     dialogsPage: state.dialogsPage, //это попадает в Dialogs
+    isAuth: state.auth.isAuth
   };
 };
 
