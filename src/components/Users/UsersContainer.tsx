@@ -6,6 +6,7 @@ import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, Use
 import Users from "./Users.tx";
 import Preloader from "../Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStateToPropsType = {
   totalUsersCount: number;
@@ -32,33 +33,10 @@ export class UsersComponent extends React.Component<any> {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pageSize)
   }
-/*    this.props.setPreloader(true);
-
-usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-  //debugger
-
-        this.props.setPreloader(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
-  }*/
 
   onPageChange = (pageNumber: number) => {
     this.props.getUsers(pageNumber, this.props.pageSize)
 
-/*    this.props.setPreloader(true);
-    this.props.setCurrentPage(pageNumber);
-/!*    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-          withCredentials:true,
-
-          }
-      )*!/
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
-        this.props.setUsers(data.items);
-        this.props.setPreloader(false);
-      });*/
   };
 
   render() {
@@ -99,38 +77,23 @@ let mapStateToProps = (state: AppStateType): { followingInProgress: Array<any>; 
   };
 };
 
-/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-  return {
-    follow: (userId: string) => {
-      dispatch(followAC(userId));
-    },
-    unfollow: (userId: string) => {
-      dispatch(unFollowAC(userId));
-    },
-    setUsers: (users: Array<UserType>) => {
-      dispatch(setUsersAC(users));
-    },
-    setCurrentPage: (pageNumber: number) => {
-      dispatch(setCurrentPageAC(pageNumber));
-    },
-    setTotalUsersCount: (totalCount: number) => {
-      dispatch(setTotalUsersCountAC(totalCount));
-    },
-    setPreloader: (isFetching: boolean) => {
-      dispatch(setPreLoadingAC(isFetching));
-    },
-  };
-};*/
 
 
-
-export default withAuthRedirect( connect(mapStateToProps, {
+/*export default withAuthRedirect( connect(mapStateToProps, {
   follow,
   unfollow,
- /* setUsers,*/
+ /!* setUsers,*!/
   setCurrentPage,
-  /*setTotalUsersCount,*/
-  /*setPreloader,*/
+  /!*setTotalUsersCount,*!/
+  /!*setPreloader,*!/
   toggleFollowingProgress,
   getUsers
-})(UsersComponent));
+})(UsersComponent));*/
+
+export default compose(withAuthRedirect, connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setCurrentPage,
+  toggleFollowingProgress,
+  getUsers
+}))(UsersComponent)
