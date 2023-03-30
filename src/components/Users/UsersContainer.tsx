@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType,} from "../../Redux/usersReducer";
 import Users from "./Users.tx";
 import Preloader from "../Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateToPropsType = {
   totalUsersCount: number;
@@ -121,7 +122,9 @@ let mapStateToProps = (state: AppStateType): { followingInProgress: Array<any>; 
   };
 };*/
 
-export default connect(mapStateToProps, {
+
+
+export default withAuthRedirect( connect(mapStateToProps, {
   follow,
   unfollow,
  /* setUsers,*/
@@ -130,4 +133,4 @@ export default connect(mapStateToProps, {
   /*setPreloader,*/
   toggleFollowingProgress,
   getUsers
-})(UsersComponent);
+})(UsersComponent));
