@@ -2,19 +2,9 @@ import React from "react";
 import {AppStateType} from "../../Redux/reduxStore";
 import {connect} from "react-redux";
 
-import {
-  follow,
-  setCurrentPage,
-  toggleFollowingProgress,
-  setPreloader,
-  setTotalUsersCount,
-  setUsers,
-  unfollow,
-  UserType,
-} from "../../Redux/usersReducer";
+import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType,} from "../../Redux/usersReducer";
 import Users from "./Users.tx";
 import Preloader from "../Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
   totalUsersCount: number;
@@ -29,17 +19,19 @@ type mapDispatchToPropsType = {
   setTotalUsersCount: (totalUsersCount: number) => void;
   setUsers: (users: Array<UserType>) => void;
   setCurrentPage: (pageNumber: number) => void;
-  follow: (userId: string) => void;
-  unfollow: (userId: string) => void;
+  follow: (userId: number) => void;
+  unfollow: (userId: number) => void;
   setPreloader: (isFetching: boolean) => void,
   toggleFollowingProgress:(Array:any, userId:number)=>void
 };
 
-export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
+//export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
 
-export class UsersComponent extends React.Component<UsersPropsType, []> {
+export class UsersComponent extends React.Component<any> {
   componentDidMount() {
-    this.props.setPreloader(true);
+    this.props.getUsers(this.props.currentPage, this.props.pageSize)
+  }
+/*    this.props.setPreloader(true);
 
 usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
   //debugger
@@ -48,22 +40,24 @@ usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
         this.props.setUsers(data.items);
         this.props.setTotalUsersCount(data.totalCount);
       });
-  }
+  }*/
 
   onPageChange = (pageNumber: number) => {
-    this.props.setPreloader(true);
+    this.props.getUsers(pageNumber, this.props.pageSize)
+
+/*    this.props.setPreloader(true);
     this.props.setCurrentPage(pageNumber);
-/*    axios
+/!*    axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
           withCredentials:true,
 
           }
-      )*/
+      )*!/
         usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
         this.props.setUsers(data.items);
         this.props.setPreloader(false);
-      });
+      });*/
   };
 
   render() {
@@ -85,7 +79,7 @@ usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
           //setUsers={this.props.setUsers}
           //isFetching={this.props.isFetching}
           //setPreloader={this.props.setPreloader}
-          toggleFollowingProgress={this.props.toggleFollowingProgress}
+          //toggleFollowingProgress={this.props.toggleFollowingProgress}
           followingInProgress={this.props.followingInProgress}
         />
       </div>
@@ -130,9 +124,10 @@ let mapStateToProps = (state: AppStateType): { followingInProgress: Array<any>; 
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
+ /* setUsers,*/
   setCurrentPage,
-  setTotalUsersCount,
-  setPreloader,
-  toggleFollowingProgress
+  /*setTotalUsersCount,*/
+  /*setPreloader,*/
+  toggleFollowingProgress,
+  getUsers
 })(UsersComponent);

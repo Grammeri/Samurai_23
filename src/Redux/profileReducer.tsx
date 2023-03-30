@@ -2,6 +2,9 @@ import {
   AddNewDialogMessageType,
   SendDialogMessageType,
 } from "./dialogReducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {toggleFollowingProgress, UnfollowSuccess} from "./usersReducer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -24,7 +27,7 @@ export type PostType = {
 };
 
 export type ProfileType = {
-  userId: string;
+  userId: number;
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
@@ -109,6 +112,14 @@ export const UpdateNewPostActionCreator = (
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>;
 export const setUserProfile = (profile: ProfileType) =>
   ({ type: SET_USER_PROFILE, profile } as const);
+
+export const getProfile = (userId:number) => {
+  return (dispatch:Dispatch)=>{
+    usersAPI.getProfile(userId).then((response) => {
+      dispatch (setUserProfile(response.data));
+    });
+  }
+}
 
 export type ActionsTypes =
   | AddPostActionType
