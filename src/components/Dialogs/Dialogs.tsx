@@ -5,7 +5,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagePageType,} from "../../Redux/dialogReducer";
 import {Redirect} from "react-router-dom";
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
   // dispatch: (action: DialogsReducerActionsTypes) => void;
   dialogsPage: MessagePageType;
   updateDialogsTextAreaText: (text: string) => void;
