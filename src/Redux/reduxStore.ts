@@ -1,11 +1,11 @@
-
 import { profileReducer } from "./profileReducer";
 import { dialogsReducer } from "./dialogReducer";
 import { sideBarReducer } from "./sidebarReducer";
 import { usersReducer } from "./usersReducer";
 import { authReducer } from "./authReducer";
 import thunkMiddleware from "redux-thunk";
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { reducer as formReducer } from "redux-form";
 
 let rootReducer = combineReducers({
   profilePage: profileReducer,
@@ -13,6 +13,7 @@ let rootReducer = combineReducers({
   sideBar: sideBarReducer,
   usersPage: usersReducer,
   auth: authReducer,
+  form: formReducer,
 });
 
 type RootReducerType = typeof rootReducer;
