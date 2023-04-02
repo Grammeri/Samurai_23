@@ -4,11 +4,6 @@ import style from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import { ProfileType } from "../../Redux/profileReducer";
 
-/*type ProfilePropsType = {
-  profilePage: ProfilePageType;
-  dispatch: (action: ActionsTypes) => void;
-  store: any;
-};*/
 
 type ProfilePropsType = {
   profile: ProfileType | null;

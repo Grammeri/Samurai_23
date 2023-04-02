@@ -1,14 +1,10 @@
 import React from "react";
-import {
-  AddNewDialogMessageActionCreator,
-  SendDialogMessageActionCreator,
-} from "../../Redux/dialogReducer";
-import { Dialogs, DialogsPropsType } from "./Dialogs";
-import { connect } from "react-redux";
-import { compose, Dispatch } from "redux";
-import { AppStateType } from "../../Redux/reduxStore";
-import { Redirect } from "react-router-dom";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import {SendDialogMessageActionCreator,} from "../../Redux/dialogReducer";
+import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import {compose, Dispatch} from "redux";
+import {AppStateType} from "../../Redux/reduxStore";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 /*type DialogsPropsType = {
   dispatch: (action: ActionsTypes) => void;
@@ -25,12 +21,12 @@ let mapStateToProps = (state: AppStateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    sendMessage: () => {
-      dispatch(SendDialogMessageActionCreator());
+    sendMessage: (newMessageDialogsPageText:string) => {
+      dispatch(SendDialogMessageActionCreator(newMessageDialogsPageText));
     },
-    updateDialogsTextAreaText: (text: string) => {
+/*    updateDialogsTextAreaText: (text: string) => {
       dispatch(AddNewDialogMessageActionCreator(text));
-    },
+    },*/
   };
 };
 

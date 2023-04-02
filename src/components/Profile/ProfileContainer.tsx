@@ -8,7 +8,7 @@ import {
   ProfileType,
   updateStatus,
 } from "../../Redux/profileReducer";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import { compose } from "redux";
 
 type PathParamsType = {
@@ -45,6 +45,7 @@ class ProfileContainer extends React.Component<PropsType> {
   }
 
   render() {
+    /*if (this.props.isAuth) return <Redirect to={"/login"}/>*/
     return (
       <div>
         <Profile

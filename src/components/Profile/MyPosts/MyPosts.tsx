@@ -2,10 +2,11 @@ import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
 import { ProfilePageType } from "../../../Redux/profileReducer";
+import {Field, reduxForm} from "redux-form";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;
-  addNewPost: (/*message: string*/) => void;
+  addNewPost: (message: string) => void;
   newPostText: string;
   onPostChangeHandler: (newPostText: string) => void;
   //dispatch: (action: ActionsTypes) => void;
@@ -18,106 +19,57 @@ export const MyPosts: React.FC<MyPostsType> = (props) => {
 
   let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-  let onAddPost = () => {
+/*  let onAddPost = () => {
     props.addNewPost();
     //let text = newPostElement.current?.value as string
-    /*props.dispatch(AddPostActionCreator());*/
-  };
+    /!*props.dispatch(AddPostActionCreator());*!/
+  };*/
 
-  let onPostChangeHandler = () => {
+/*  let onPostChangeHandler = () => {
     props.onPostChangeHandler(newPostElement.current?.value as string);
-    /*    let newPost = newPostElement.current?.value as string;
-    props.dispatch(UpdateNewPostActionCreator(newPost));*/
-  };
-
+    /!*    let newPost = newPostElement.current?.value as string;
+    props.dispatch(UpdateNewPostActionCreator(newPost));*!/
+  };*/
+let addNewPost = (values: any) =>{
+  props.addNewPost(values.newPostPageText);
+}
   return (
     <div className={style.myPosts}>
-      <div>
+
         <h2>My posts</h2>
         <div className={style.textareaAndBtn}>
-          <div className={style.textarea}>
-            <textarea
-              ref={newPostElement}
-              value={props.newPostText}
-              onChange={onPostChangeHandler}
-            />
-          </div>
-          <div className={style.button}>
-            <button onClick={onAddPost}>Add post</button>
-          </div>
+
+          <AddPostFormRedux onSubmit={addNewPost}/>
+
         </div>
-      </div>
+
       {postsElements}
     </div>
   );
 };
 
-//Saved 42
-/*import React from "react";
-import { Post } from "./Post/Post";
-import style from "./MyPosts.module.css";
-import {
-  AddPostActionCreator,
-  UpdateNewPostActionCreator,
-} from "../../../Redux/profileReducer";
-import { ActionsTypes, ProfilePageType } from "../../../Redux/dialogReducer";
 
-export type MyPostsType = {
-  profilePage: ProfilePageType;
-  //addPost: (/!*message: string*!/) => void;
-  newPostText: string;
-  //updateNewPostText: (newPostText: string) => void;
-  dispatch: (action: ActionsTypes) => void;
-};
+type AddPostFormType = {
+  handleSubmit: any
+}
 
-export const MyPosts: React.FC<MyPostsType> = (props) => {
-  /!*  let postsData = [
-        { id: 1, message: "How are you?", likesCount: 15 },
-        { id: 2, message: "I am good!", likesCount: 20 },
-      ];*!/
-
-  let postsElements = props.profilePage.postsData.map((el) => (
-      <Post message={el.message} likesCount={el.likesCount} />
-  ));
-
-  let newPostElement = React.createRef<HTMLTextAreaElement>();
-
-  /!*  let addPost = () => {
-    if (newPostElement.current) {
-      props.addPost(newPostElement.current?.value);
-      //props.updateNewPostText("");
-    }
-  };*!/
-
-  let addNewPost = () => {
-    //let text = newPostElement.current?.value as string
-    props.dispatch(AddPostActionCreator());
-  };
-
-  let onPostChangeHandler = () => {
-    //console.log(newPostElement.current?.value);
-    let newPost = newPostElement.current?.value as string;
-    props.dispatch(UpdateNewPostActionCreator(newPost));
-  };
-
+export const AddPostForm = (props: AddPostFormType) => {
   return (
-      <div className={style.myPosts}>
-        <div>
-          <h2>My posts</h2>
-          <div className={style.textareaAndBtn}>
-            <div className={style.textarea}>
-            <textarea
-                ref={newPostElement}
-                value={props.newPostText}
-                onChange={onPostChangeHandler}
+      <form onSubmit={props.handleSubmit} className={style.messageTextarea}>
+        <div className={style.textarea}>
+            <Field
+                placeholder={"Enter your message"} component={"textarea"} name={"newPostPageText"}
+
             />
-            </div>
-            <div className={style.button}>
-              <button onClick={addNewPost}>Add post</button>
-            </div>
-          </div>
         </div>
-        {postsElements}
-      </div>
-  );
-};*/
+        <div className={style.button}>
+          <button>Add post</button>
+        </div>
+      </form>
+  )
+}
+
+const AddPostFormRedux = reduxForm({
+  form: "addPostMessageForm"
+
+})(AddPostForm)
