@@ -1,6 +1,5 @@
-import { AddPostActionType, UpdateNewPostActionType } from "./profileReducer";
+import { AddPostActionType } from "./profileReducer";
 import {
-  AddNewDialogMessageType,
   SendDialogMessageType,
 } from "./dialogReducer";
 
@@ -32,6 +31,6 @@ export const sideBarReducer = (
 
 export type ActionsTypes =
   | AddPostActionType
-  | UpdateNewPostActionType
-  | AddNewDialogMessageType
+ /* | UpdateNewPostActionType*/
+/*  | AddNewDialogMessageType*/
   | SendDialogMessageType;

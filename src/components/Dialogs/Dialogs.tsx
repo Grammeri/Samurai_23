@@ -3,7 +3,7 @@ import style from "./Dialogs.module.css";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessagePageType,} from "../../Redux/dialogReducer";
-import {Field, reduxForm} from "redux-form";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
 export type DialogsPropsType = {
     // dispatch: (action: DialogsReducerActionsTypes) => void;
@@ -55,14 +55,15 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     );
 };
 
-type AddMessageFormType = {
+/*type AddMessageFormType = {
     handleSubmit: any
 }
 
 export const AddMessageForm = (props: AddMessageFormType) => {
     return (
         <form onSubmit={props.handleSubmit} className={style.messageTextarea}>
-            <Field placeholder={"Enter your message"} component={"textarea"} name={"newMessageDialogsPageText"}
+            <Field placeholder={"Enter your message"} component={Textarea} name={"newMessageDialogsPageText"}
+                   validate={[required]}
             />
             <button className={style.messageButton}>
                 Send
@@ -74,4 +75,4 @@ export const AddMessageForm = (props: AddMessageFormType) => {
 const AddMessageFormRedux = reduxForm({
     form: "dialogAddMessageForm"
 
-})(AddMessageForm)
+})(AddMessageForm)*/

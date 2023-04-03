@@ -50,6 +50,7 @@ export type ProfilePageType = {
   //newPostText: string;
   profile: ProfileType | null;
   status: string;
+  newPostText: string
 };
 
 export type InitialStateType = ProfilePageType;
@@ -62,6 +63,7 @@ export let initialState: InitialStateType = {
   //newPostText: "NewPostText",
   profile: null,
   status: "",
+  newPostText: ''
 };
 
 export let profileReducer = (
