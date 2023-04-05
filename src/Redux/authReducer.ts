@@ -1,6 +1,6 @@
-import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/api";
-import {toggleFollowingProgress, UnfollowSuccess} from "./usersReducer";
+import { Dispatch } from "redux";
+import { authAPI } from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = "SET-USER-DATA";
 //const UNFOLLOW = "UNFOLLOW";
@@ -21,7 +21,7 @@ export type InitialStateType = {
   email: string | null;
   login: string | null;
   isFetching: boolean;
-  isAuth: boolean
+  isAuth: boolean;
 };
 
 export let initialState: InitialStateType = {
@@ -29,7 +29,7 @@ export let initialState: InitialStateType = {
   email: null,
   login: null,
   isFetching: false,
-  isAuth:false
+  isAuth: false,
 };
 
 export let authReducer = (
@@ -40,8 +40,8 @@ export let authReducer = (
     case SET_USER_DATA:
       return <InitialStateType>{
         ...state,
-        ...action.data,
-        isAuth:true
+        ...action.payload,
+        isAuth: true,
       };
     default:
       return state;
@@ -49,20 +49,49 @@ export let authReducer = (
 };
 
 export type SetUserDataActionType = ReturnType<typeof setAuthUserData>;
-export const setAuthUserData = (userId: number, email: string, login: string) =>
-  ({ type: SET_USER_DATA, data: { userId, email, login } } as const);
+export const setAuthUserData = (
+  userId: number | null,
+  email: string | null,
+  login: string | null,
+  isAuth: boolean
+) =>
+  ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } } as const);
 
 export const getAuthUserData = () => {
-  return (dispatch:Dispatch)=>{
+  return (dispatch: Dispatch) => {
     authAPI.me().then((response) => {
-
       if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data
-       dispatch(setAuthUserData(id, email, login))
+        let { id, login, email } = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
       }
     });
-  }
-}
+  };
+};
 
+export const login = (email: string, password: string, rememberMe: boolean) => {
+  return (dispatch: Dispatch) => {
+
+    //dispatch (stopSubmit("login", {_error: "Common Error!!!"}))
+
+    authAPI.login(email, password, rememberMe).then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData());
+      } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some Error!"
+        dispatch (stopSubmit("login", {email: message}))
+      }
+    });
+  };
+};
+
+export const logout = () => {
+  return (dispatch: Dispatch) => {
+    authAPI.logout().then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false));
+      }
+    });
+  };
+};
 
 export type AuthReducerActionsTypes = SetUserDataActionType;
