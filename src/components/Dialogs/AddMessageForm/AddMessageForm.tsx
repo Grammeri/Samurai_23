@@ -1,7 +1,7 @@
 import style from "./../Dialogs.module.css";
 import {Field, reduxForm} from "redux-form";
-import {Textarea} from "../../../components/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "components/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "utils/validators/validators";
 import React from "react";
 
 type AddMessageFormType = {

@@ -1,5 +1,5 @@
 import React from "react";
-import { AppStateType } from "../../Redux/reduxStore";
+import { AppStateType } from "Redux/reduxStore";
 import { connect } from "react-redux";
 
 import {
@@ -91,17 +91,6 @@ let mapStateToProps = (
     followingInProgress: state.usersPage.followingInProgres,
   };
 };
-
-/*export default withAuthRedirect( connect(mapStateToProps, {
-  follow,
-  unfollow,
- /!* setUsers,*!/
-  setCurrentPage,
-  /!*setTotalUsersCount,*!/
-  /!*setPreloader,*!/
-  toggleFollowingProgress,
-  getUsers
-})(UsersComponent));*/
 
 export default compose<React.ComponentType>(
   withAuthRedirect,

@@ -1,5 +1,5 @@
 import React from "react";
-import {UserType} from "../../Redux/usersReducer";
+import {UserType} from "Redux/usersReducer";
 import style from "./Users.module.css";
 import Cat from "./../../assets/cat.jpg";
 import {NavLink} from "react-router-dom";

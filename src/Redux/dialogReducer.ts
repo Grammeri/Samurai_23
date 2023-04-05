@@ -1,5 +1,3 @@
-import {AddPostActionType} from "./profileReducer";
-
 /*const UPDATE_NEW_DIALOG_MESSAGE = "UPDATE-NEW-DIALOG-MESSAGE";*/
 const SEND_DIALOG_MESSAGE = "SEND-DIALOG-MESSAGE";
 

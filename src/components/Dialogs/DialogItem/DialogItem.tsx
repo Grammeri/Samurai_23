@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./DialogItem.module.css";
-import { NavLink } from "react-router-dom";
-import Cheburashka from "../../../assets/Cheburashka.jpg";
+import {NavLink} from "react-router-dom";
 
 type DialogsItemType = {
   name: string;

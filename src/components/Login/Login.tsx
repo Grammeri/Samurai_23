@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../../components/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {Input} from "components/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "utils/validators/validators";
 import {connect} from "react-redux";
-import {login} from "../../Redux/authReducer";
+import {login} from "Redux/authReducer";
 import styles from "../../components/FormsControls/FormsControls.module.css"
 
 export type FormDataType = {

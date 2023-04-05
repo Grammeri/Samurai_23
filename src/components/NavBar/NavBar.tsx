@@ -1,11 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import style from "./NavBar.module.css";
-import { Friends } from "./Friends/Friends";
-import { AppStateType } from "../../Redux/reduxStore";
 
 type NavBarPropsType = {
-  state: AppStateType;
+    //state: AppStateType;
 };
 
 export const NavBar = (props: NavBarPropsType) => {
@@ -41,9 +39,9 @@ export const NavBar = (props: NavBarPropsType) => {
           Settings
         </NavLink>
       </div>
-      <div>
-        <Friends friends={props.state.sideBar.friends} />
-      </div>
+{/*      <div>
+        <Friend name={props.state.sideBar.friends.map(m=>m.name)}  />
+      </div>*/}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React from "react";
-import {SendDialogMessageActionCreator,} from "../../Redux/dialogReducer";
+import {SendDialogMessageActionCreator,} from "Redux/dialogReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {AppStateType} from "../../Redux/reduxStore";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {AppStateType} from "Redux/reduxStore";
+import {withAuthRedirect} from "hoc/withAuthRedirect";
 
 /*type DialogsPropsType = {
   dispatch: (action: ActionsTypes) => void;
