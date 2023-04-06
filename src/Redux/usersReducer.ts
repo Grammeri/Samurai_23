@@ -1,5 +1,5 @@
-import { usersAPI } from "api/api";
-import { Dispatch } from "redux";
+import {usersAPI} from "api/api";
+import {Dispatch} from "redux";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -9,23 +9,7 @@ const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SET_PRELOADER = "SET-PRELOADER";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS-FOLLOWING-PROGRESS";
 
-/*export type LocationType = {
-  city: string;
-  country: string;
-};
 
-export type UserType = {
-  id: number;
-  followed: boolean;
-  fullName: string;
-  status: string;
-  location: LocationType;
-  photo: any;
-};*/
-
-/*export type UsersType = {
-  users: Array<UserType>;
-};*/
 export type UserType = {
   id: number;
   name: string;
@@ -41,7 +25,7 @@ export type InitialStateType = {
   users: Array<UserType>;
   pageSize: number;
   totalUsersCount: number;
-  currentPage: number;
+  page: number;
   isFetching: boolean;
   followingInProgres: Array<any>;
 };
@@ -50,7 +34,7 @@ export let initialState: InitialStateType = {
   users: [],
   pageSize: 5,
   totalUsersCount: 0,
-  currentPage: 1,
+  page: 1,
   isFetching: true,
   followingInProgres: [], //id of the user to be followed/unfollowed
 };
@@ -84,7 +68,7 @@ export let usersReducer = (
       return { ...state, users: [...action.users /*...state.users*/] }; //склеиваем 2 массива
     }
     case SET_CURRENT_PAGE: {
-      return { ...state, currentPage: action.currentPage };
+      return { ...state, page: action.page };
     }
     case SET_TOTAL_USERS_COUNT: {
       return { ...state, totalUsersCount: action.count };
@@ -120,11 +104,11 @@ export const setUsers = (users: Array<UserType>) =>
     users,
   } as const);
 
-export type CurrentPageActionType = ReturnType<typeof setCurrentPage>;
-export const setCurrentPage = (currentPage: number) =>
+export type pageActionType = ReturnType<typeof setCurrentPage>;
+export const setCurrentPage = (page: number) =>
   ({
     type: SET_CURRENT_PAGE,
-    currentPage,
+    page,
   } as const);
 
 export type TotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>;
@@ -151,10 +135,12 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     userId,
   } as const);
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number) => {
   return (dispatch: Dispatch) => {
     dispatch(setPreloader(true));
-    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+    dispatch(setCurrentPage(page));
+
+    usersAPI.getUsers(page, pageSize).then((data) => {
       //debugger
 
       dispatch(setPreloader(false));
@@ -192,7 +178,7 @@ export type UsersReducerActionsTypes =
   | FollowSuccessActionType
   | UnFollowSuccessActionType
   | SetUsersActionType
-  | CurrentPageActionType
+  | pageActionType
   | TotalUsersCountActionType
   | setPreloaderActionType
   | followingInProgressActionType;
