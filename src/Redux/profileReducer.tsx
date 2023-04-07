@@ -1,11 +1,12 @@
-import {SendDialogMessageType,} from "./dialogReducer";
-import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "api/api";
+import { SendDialogMessageType } from "./dialogReducer";
+import { Dispatch } from "redux";
+import { profileAPI, usersAPI } from "api/api";
 
 const ADD_POST = "ADD-POST";
 /*const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";*/
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
+const DELETE_POST = "DELETE-POST";
 
 /*export type MessageType = {
   id: number;
@@ -50,7 +51,7 @@ export type ProfilePageType = {
   //newPostText: string;
   profile: ProfileType | null;
   status: string;
-  newPostText: string
+  newPostText: string;
 };
 
 export type InitialStateType = ProfilePageType;
@@ -63,7 +64,7 @@ export let initialState: InitialStateType = {
   //newPostText: "NewPostText",
   profile: null,
   status: "",
-  newPostText: ''
+  newPostText: "",
 };
 
 export let profileReducer = (
@@ -77,16 +78,16 @@ export let profileReducer = (
         message: action.newPostText,
         likesCount: 0,
       };
-      return{
+      return {
         ...state,
-        postsData:[...state.postsData, newPost],
-        newPostText: ""
-      }
+        postsData: [...state.postsData, newPost],
+        newPostText: "",
+      };
       /*let stateCopy = { ...state, postsData: [...state.postsData, newPost] };
       stateCopy.newPostText = "";
       return stateCopy;*/
     }
-/*    case UPDATE_NEW_POST_TEXT: {
+    /*    case UPDATE_NEW_POST_TEXT: {
       //let stateCopy = { ...state, newPostText: action.newText };
       return { ...state, newPostText: action.newText };
     }*/
@@ -96,13 +97,20 @@ export let profileReducer = (
     case SET_STATUS: {
       return { ...state, status: action.status };
     }
+    case DELETE_POST: {
+      return {
+        ...state,
+        postsData: state.postsData.filter((f) => f.id != action.postId),
+      };
+    }
     default:
       return state;
   }
 };
 
 export type AddPostActionType = ReturnType<typeof AddPostActionCreator>;
-export const AddPostActionCreator = (newPostText:string) => ({ type: ADD_POST, newPostText } as const);
+export const AddPostActionCreator = (newPostText: string) =>
+  ({ type: ADD_POST, newPostText } as const);
 
 /*export type UpdateNewPostActionType = {
   type: "UPDATE-NEW-POST-TEXT";
@@ -125,6 +133,10 @@ export const setUserProfile = (profile: ProfileType) =>
 export type setStatusActionType = ReturnType<typeof setStatus>;
 export const setStatus = (status: string) =>
   ({ type: SET_STATUS, status } as const);
+
+export type deletePostActionType = ReturnType<typeof deletePost>;
+export const deletePost = (postId: string) =>
+  ({ type: DELETE_POST, postId } as const);
 
 //Thunks
 export const getProfile = (userId: number) => {
@@ -155,8 +167,9 @@ export const updateStatus = (status: string) => {
 
 export type ActionsTypes =
   | AddPostActionType
-/*  | UpdateNewPostActionType*/
-/*  | AddNewDialogMessageType*/
+  /*  | UpdateNewPostActionType*/
+  /*  | AddNewDialogMessageType*/
   | SendDialogMessageType
   | setUserProfileActionType
-  | setStatusActionType;
+  | setStatusActionType
+  | deletePostActionType;
