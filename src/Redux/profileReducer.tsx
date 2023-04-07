@@ -139,30 +139,25 @@ export const deletePost = (postId: string) =>
   ({ type: DELETE_POST, postId } as const);
 
 //Thunks
-export const getProfile = (userId: number) => {
-  return (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId).then((response) => {
-      dispatch(setUserProfile(response.data));
-    });
-  };
+export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
+  let response = await usersAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data));
 };
 
-export const getStatus = (userId: number) => (dispatch: Dispatch) => {
-  profileAPI.getStatus(userId).then((response) => {
-    //debugger;
-    dispatch(setStatus(response.data));
-  });
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+  const response = await profileAPI.getStatus(userId);
+  //debugger;
+  dispatch(setStatus(response.data));
 };
 
-export const updateStatus = (status: string) => {
-  return (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status).then((response) => {
-      //debugger;
-      if (response.data.resultCode === 0) {
-        dispatch(setStatus(status));
-      }
-    });
-  };
+//thunk
+
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+  const response = await profileAPI.updateStatus(status);
+  //debugger;
+  if (response.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
 };
 
 export type ActionsTypes =

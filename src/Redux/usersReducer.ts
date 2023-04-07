@@ -1,5 +1,5 @@
-import {usersAPI} from "api/api";
-import {Dispatch} from "redux";
+import { usersAPI } from "api/api";
+import { Dispatch } from "redux";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -8,7 +8,6 @@ const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
 const SET_PRELOADER = "SET-PRELOADER";
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS-FOLLOWING-PROGRESS";
-
 
 export type UserType = {
   id: number;
@@ -38,6 +37,7 @@ export let initialState: InitialStateType = {
   isFetching: true,
   followingInProgres: [], //id of the user to be followed/unfollowed
 };
+
 
 export let usersReducer = (
   state: InitialStateType = initialState,
@@ -135,50 +135,72 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     userId,
   } as const);
 
-export const requestUsers = (page: number, pageSize: number) => {
-  return (dispatch: Dispatch) => {
-    dispatch(setPreloader(true));
-    dispatch(setCurrentPage(page));
+export const requestUsers =
+  (page: number, pageSize: number) => {
+    return async (dispatch: Dispatch) => {
+      dispatch(setPreloader(true));
+      dispatch(setCurrentPage(page));
 
-    usersAPI.getUsers(page, pageSize).then((data) => {
+      let data = await usersAPI.getUsers(page, pageSize);
       //debugger
 
       dispatch(setPreloader(false));
       dispatch(setUsers(data.items));
       dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+    };
+  }
+
+const followUnfollowFlow = async (
+  dispatch: Dispatch,
+  userId: number,
+  apiMethod: any,
+  actionCreator: any
+) => {
+  dispatch(toggleFollowingProgress(true, userId));
+  let response = await apiMethod(userId);
+
+  if (response.data.resultCode === 0) {
+    dispatch(actionCreator(userId));
+  }
+  dispatch(toggleFollowingProgress(false, userId));
 };
 
 export const follow = (userId: number) => {
-  return (dispatch: Dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersAPI.postFollow(userId).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(FollowSuccess(userId));
-      }
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
-};
+  return async (dispatch: Dispatch) => {
 
-export const unfollow = (userId: number) => {
-  return (dispatch: Dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    usersAPI.deleteFollow(userId).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(UnfollowSuccess(userId));
-      }
-      dispatch(toggleFollowingProgress(false, userId));
-    });
-  };
-};
+/*    let apiMethod = usersAPI.postFollow.bind(usersAPI);
+    let actionCreator = FollowSuccess;*/
+    followUnfollowFlow(dispatch, userId, usersAPI.postFollow.bind(usersAPI), FollowSuccess);
 
-export type UsersReducerActionsTypes =
-  | FollowSuccessActionType
-  | UnFollowSuccessActionType
-  | SetUsersActionType
-  | pageActionType
-  | TotalUsersCountActionType
-  | setPreloaderActionType
-  | followingInProgressActionType;
+    /*    dispatch(toggleFollowingProgress(true, userId));
+        let response = await apiMethod(userId);
+        if (response.data.resultCode === 0) {
+          dispatch(actionCreator(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+      };*/
+  };
+}
+
+  export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
+/*    let apiMethod = usersAPI.deleteFollow.bind(usersAPI);
+    let actionCreator = UnfollowSuccess;*/
+    followUnfollowFlow(dispatch, userId, usersAPI.deleteFollow.bind(usersAPI), UnfollowSuccess);
+
+    /*  dispatch(toggleFollowingProgress(true, userId));
+      let response = await apiMethod(userId);
+      if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userId));
+      }
+      dispatch(toggleFollowingProgress(false, userId));*/
+  };
+
+  export type UsersReducerActionsTypes =
+      | FollowSuccessActionType
+      | UnFollowSuccessActionType
+      | SetUsersActionType
+      | pageActionType
+      | TotalUsersCountActionType
+      | setPreloaderActionType
+      | followingInProgressActionType;
+
