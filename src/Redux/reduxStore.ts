@@ -26,5 +26,6 @@ let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 export type StoreType = typeof store;
 // @ts-ignore
 window.store = store;
+//checking
 
 export default store;
