@@ -1,10 +1,10 @@
 import React from "react";
-import {SendDialogMessageActionCreator,} from "Redux/dialogReducer";
-import {Dialogs} from "./Dialogs";
-import {connect} from "react-redux";
-import {compose, Dispatch} from "redux";
-import {AppStateType} from "Redux/reduxStore";
-import {withAuthRedirect} from "hoc/withAuthRedirect";
+import { SendDialogMessageActionCreator } from "Redux/dialogReducer";
+import { Dialogs } from "./Dialogs";
+import { connect } from "react-redux";
+import { compose, Dispatch } from "redux";
+import { withAuthRedirect } from "hoc/withAuthRedirect";
+import { RootReducerType } from "Redux/reduxStore";
 
 /*type DialogsPropsType = {
   dispatch: (action: ActionsTypes) => void;
@@ -12,7 +12,7 @@ import {withAuthRedirect} from "hoc/withAuthRedirect";
   store: StoreType;
 };*/
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: RootReducerType) => {
   return {
     dialogsPage: state.dialogsPage, //это попадает в Dialogs
     //isAuth: state.auth.isAuth
@@ -21,10 +21,10 @@ let mapStateToProps = (state: AppStateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    sendMessage: (newMessageDialogsPageText:string) => {
+    sendMessage: (newMessageDialogsPageText: string) => {
       dispatch(SendDialogMessageActionCreator(newMessageDialogsPageText));
     },
-/*    updateDialogsTextAreaText: (text: string) => {
+    /*    updateDialogsTextAreaText: (text: string) => {
       dispatch(AddNewDialogMessageActionCreator(text));
     },*/
   };

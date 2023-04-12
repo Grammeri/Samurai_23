@@ -24,12 +24,12 @@ export let initialState: InitialStateType = {
 
 export const sideBarReducer = (
   state = initialState,
-  action: ActionsTypes
+  action: SideBarReducerActionsTypes
 ): InitialStateType => {
   return state;
 };
 
-export type ActionsTypes =
+export type SideBarReducerActionsTypes =
   | AddPostActionType
  /* | UpdateNewPostActionType*/
 /*  | AddNewDialogMessageType*/

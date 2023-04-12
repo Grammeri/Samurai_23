@@ -1,9 +1,9 @@
 import React from "react";
-import {AddPostActionCreator,} from "../../../Redux/profileReducer";
-import {Dispatch} from "redux";
-import {connect} from "react-redux";
-import {MyPosts} from "./MyPosts";
-import {AppStateType} from "../../../Redux/reduxStore";
+import { AddPostActionCreator } from "../../../Redux/profileReducer";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
+import { MyPosts } from "./MyPosts";
+import { RootReducerType } from "Redux/reduxStore";
 
 /*export type MyPostsContainerType = {
   //profilePage: ProfilePageType;
@@ -14,7 +14,7 @@ import {AppStateType} from "../../../Redux/reduxStore";
   store: StoreType;
 };*/
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: RootReducerType) => {
   return {
     profilePage: state.profilePage,
     // postsData: state.profilePage.postsData,
@@ -24,12 +24,12 @@ let mapStateToProps = (state: AppStateType) => {
 
 let mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    addNewPost: (newPostPageText:string) => {
+    addNewPost: (newPostPageText: string) => {
       dispatch(AddPostActionCreator(newPostPageText));
-    }/*,
+    } /*,
     onPostChangeHandler: (newPost: string) => {
       dispatch(UpdateNewPostActionCreator(newPost));
-    },*/
+    },*/,
   };
 };
 

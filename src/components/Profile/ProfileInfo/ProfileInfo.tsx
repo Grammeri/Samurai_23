@@ -1,14 +1,13 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../../Preloader/Preloader";
-import { ProfileType } from "../../../Redux/profileReducer";
-import ProfileStatus from "./ProfileStatus";
+import {ProfileType} from "../../../Redux/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatusWithHooks";
 
 type ProfileInfoType = {
   profile: ProfileType | null;
   status: string;
-  updateStatus: string;
+  updateStatus: (status:string)=>void;
 };
 
 export const ProfileInfo = (props: ProfileInfoType) => {

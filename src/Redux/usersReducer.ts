@@ -183,24 +183,16 @@ export const follow = (userId: number) => {
 }
 
   export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
-/*    let apiMethod = usersAPI.deleteFollow.bind(usersAPI);
-    let actionCreator = UnfollowSuccess;*/
+    /*    let apiMethod = usersAPI.deleteFollow.bind(usersAPI);
+        let actionCreator = UnfollowSuccess;*/
     followUnfollowFlow(dispatch, userId, usersAPI.deleteFollow.bind(usersAPI), UnfollowSuccess);
+  }
 
-    /*  dispatch(toggleFollowingProgress(true, userId));
-      let response = await apiMethod(userId);
-      if (response.data.resultCode === 0) {
-        dispatch(actionCreator(userId));
-      }
-      dispatch(toggleFollowingProgress(false, userId));*/
-  };
-
-  export type UsersReducerActionsTypes =
-      | FollowSuccessActionType
-      | UnFollowSuccessActionType
-      | SetUsersActionType
-      | pageActionType
-      | TotalUsersCountActionType
-      | setPreloaderActionType
-      | followingInProgressActionType;
+    export type UsersReducerActionsTypes = FollowSuccessActionType
+        | UnFollowSuccessActionType
+        | SetUsersActionType
+        | pageActionType
+        | TotalUsersCountActionType
+        | setPreloaderActionType
+        | followingInProgressActionType
 

@@ -1,8 +1,9 @@
 import { Dispatch } from "redux";
 import { authAPI } from "api/api";
 import { stopSubmit } from "redux-form";
+import { AppThunk } from "Redux/reduxStore";
 
-const SET_USER_DATA = "auth/SET-USER-DATA";
+const SET_USER_DATA = "samurai-network/auth/SET-USER-DATA";
 //const UNFOLLOW = "UNFOLLOW";
 
 type DataComponentsType = {
@@ -78,7 +79,7 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
 
 export const login =
   (email: string, password: string, rememberMe: boolean) =>
-  async (dispatch: Dispatch) => {
+  async (dispatch: any) => {
     //dispatch (stopSubmit("login", {_error: "Common Error!!!"}))
 
     let response = await authAPI.login(email, password, rememberMe);
@@ -97,9 +98,9 @@ export const login =
 export const logout = () => async (dispatch: Dispatch) => {
   let response = await authAPI.logout();
 
-    if (response.data.resultCode === 0) {
-      dispatch(setAuthUserData(null, null, null, false));
-    }
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthUserData(null, null, null, false));
+  }
 };
 
 export type AuthReducerActionsTypes = SetUserDataActionType;

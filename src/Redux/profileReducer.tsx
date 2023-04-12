@@ -69,7 +69,7 @@ export let initialState: InitialStateType = {
 
 export let profileReducer = (
   state: InitialStateType = initialState,
-  action: ActionsTypes
+  action: ProfileReducerActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
@@ -83,14 +83,7 @@ export let profileReducer = (
         postsData: [...state.postsData, newPost],
         newPostText: "",
       };
-      /*let stateCopy = { ...state, postsData: [...state.postsData, newPost] };
-      stateCopy.newPostText = "";
-      return stateCopy;*/
     }
-    /*    case UPDATE_NEW_POST_TEXT: {
-      //let stateCopy = { ...state, newPostText: action.newText };
-      return { ...state, newPostText: action.newText };
-    }*/
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
@@ -100,7 +93,7 @@ export let profileReducer = (
     case DELETE_POST: {
       return {
         ...state,
-        postsData: state.postsData.filter((f) => f.id != action.postId),
+        postsData: state.postsData.filter((f) => f.id != +action.postId),
       };
     }
     default:
@@ -111,20 +104,6 @@ export let profileReducer = (
 export type AddPostActionType = ReturnType<typeof AddPostActionCreator>;
 export const AddPostActionCreator = (newPostText: string) =>
   ({ type: ADD_POST, newPostText } as const);
-
-/*export type UpdateNewPostActionType = {
-  type: "UPDATE-NEW-POST-TEXT";
-  newText: string;
-};
-
-export const UpdateNewPostActionCreator = (
-  newPost: string
-): UpdateNewPostActionType => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: newPost,
-  };
-};*/
 
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>;
 export const setUserProfile = (profile: ProfileType) =>
@@ -141,7 +120,7 @@ export const deletePost = (postId: string) =>
 //Thunks
 export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
   let response = await usersAPI.getProfile(userId);
-    dispatch(setUserProfile(response.data));
+  dispatch(setUserProfile(response.data));
 };
 
 export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
@@ -160,10 +139,8 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export type ActionsTypes =
+export type ProfileReducerActionsTypes =
   | AddPostActionType
-  /*  | UpdateNewPostActionType*/
-  /*  | AddNewDialogMessageType*/
   | SendDialogMessageType
   | setUserProfileActionType
   | setStatusActionType
