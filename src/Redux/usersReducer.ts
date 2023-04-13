@@ -1,5 +1,7 @@
 import { usersAPI } from "api/api";
 import { Dispatch } from "redux";
+import { AppThunk } from "Redux/reduxStore";
+import { updateObjectInArray } from "utils/objectHelper";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -38,7 +40,6 @@ export let initialState: InitialStateType = {
   followingInProgres: [], //id of the user to be followed/unfollowed
 };
 
-
 export let usersReducer = (
   state: InitialStateType = initialState,
   action: UsersReducerActionsTypes
@@ -47,22 +48,28 @@ export let usersReducer = (
     case FOLLOW:
       return <InitialStateType>{
         ...state,
-        users: state.users.map((u) => {
+        users: updateObjectInArray(state.users, action.userId, "id", {
+          followed: true,
+        }),
+        /*        users: state.users.map((u) => {
           if (u.id === action.userId) {
             return { ...u, followed: true };
           }
           return u;
-        }),
+        }),*/
       };
     case UNFOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
+        users: updateObjectInArray(state.users, action.userId, "id", {
+          followed: false,
+        }),
+        /*users: state.users.map((u) => {
           if (u.id === action.userId) {
             return { ...u, followed: false };
           }
           return u;
-        }),
+        }),*/
       };
     case SET_USERS: {
       return { ...state, users: [...action.users /*...state.users*/] }; //склеиваем 2 массива
@@ -135,20 +142,19 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     userId,
   } as const);
 
-export const requestUsers =
-  (page: number, pageSize: number) => {
-    return async (dispatch: Dispatch) => {
-      dispatch(setPreloader(true));
-      dispatch(setCurrentPage(page));
+export const requestUsers = (page: number, pageSize: number) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(setPreloader(true));
+    dispatch(setCurrentPage(page));
 
-      let data = await usersAPI.getUsers(page, pageSize);
-      //debugger
+    let data = await usersAPI.getUsers(page, pageSize);
+    //debugger
 
-      dispatch(setPreloader(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    };
-  }
+    dispatch(setPreloader(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+  };
+};
 
 const followUnfollowFlow = async (
   dispatch: Dispatch,
@@ -167,10 +173,14 @@ const followUnfollowFlow = async (
 
 export const follow = (userId: number) => {
   return async (dispatch: Dispatch) => {
-
-/*    let apiMethod = usersAPI.postFollow.bind(usersAPI);
+    /*    let apiMethod = usersAPI.postFollow.bind(usersAPI);
     let actionCreator = FollowSuccess;*/
-    followUnfollowFlow(dispatch, userId, usersAPI.postFollow.bind(usersAPI), FollowSuccess);
+    followUnfollowFlow(
+      dispatch,
+      userId,
+      usersAPI.postFollow.bind(usersAPI),
+      FollowSuccess
+    );
 
     /*    dispatch(toggleFollowingProgress(true, userId));
         let response = await apiMethod(userId);
@@ -180,19 +190,22 @@ export const follow = (userId: number) => {
         dispatch(toggleFollowingProgress(false, userId));
       };*/
   };
-}
+};
 
-  export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
-    /*    let apiMethod = usersAPI.deleteFollow.bind(usersAPI);
-        let actionCreator = UnfollowSuccess;*/
-    followUnfollowFlow(dispatch, userId, usersAPI.deleteFollow.bind(usersAPI), UnfollowSuccess);
-  }
+export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
+  followUnfollowFlow(
+    dispatch,
+    userId,
+    usersAPI.deleteFollow.bind(usersAPI),
+    UnfollowSuccess
+  );
+};
 
-    export type UsersReducerActionsTypes = FollowSuccessActionType
-        | UnFollowSuccessActionType
-        | SetUsersActionType
-        | pageActionType
-        | TotalUsersCountActionType
-        | setPreloaderActionType
-        | followingInProgressActionType
-
+export type UsersReducerActionsTypes =
+  | FollowSuccessActionType
+  | UnFollowSuccessActionType
+  | SetUsersActionType
+  | pageActionType
+  | TotalUsersCountActionType
+  | setPreloaderActionType
+  | followingInProgressActionType;

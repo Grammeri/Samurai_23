@@ -1,7 +1,5 @@
 import { AddPostActionType } from "./profileReducer";
-import {
-  SendDialogMessageType,
-} from "./dialogReducer";
+import { SendDialogMessageType } from "./dialogReducer";
 
 export type FriendType = {
   id: number;
@@ -31,6 +29,4 @@ export const sideBarReducer = (
 
 export type SideBarReducerActionsTypes =
   | AddPostActionType
- /* | UpdateNewPostActionType*/
-/*  | AddNewDialogMessageType*/
   | SendDialogMessageType;

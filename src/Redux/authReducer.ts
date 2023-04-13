@@ -58,16 +58,6 @@ export const setAuthUserData = (
 ) =>
   ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } } as const);
 
-/*export const getAuthUserData = () => {
-  return (dispatch: Dispatch) => {
-    return authAPI.me().then((response) => {
-      if (response.data.resultCode === 0) {
-        let { id, login, email } = response.data.data;
-        dispatch(setAuthUserData(id, email, login, true));
-      }
-    });
-  };
-};*/
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
   let response = await authAPI.me();
 
