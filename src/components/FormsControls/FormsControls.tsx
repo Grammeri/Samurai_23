@@ -1,6 +1,10 @@
 import React, { FC, HTMLInputTypeAttribute } from "react";
 import styles from "./FormsControls.module.css";
-import { WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
+import {
+  Field,
+  WrappedFieldInputProps,
+  WrappedFieldMetaProps,
+} from "redux-form";
 
 type FormsControls = {
   input: WrappedFieldInputProps;
@@ -35,5 +39,27 @@ export const Input = (props: any) => {
     <FormControl {...props}>
       <input {...input} {...restProps} />
     </FormControl>
+  );
+};
+
+export const createField = (
+  placeholder: string | null,
+  name: string,
+  validators: any,
+  component: any,
+  props: any = {},
+  text = ""
+) => {
+  return (
+    <div>
+      <Field
+        placeholder={placeholder}
+        name={name}
+        validate={validators}
+        component={component}
+        {...props}
+      />{" "}
+      {text}
+    </div>
   );
 };
