@@ -1,9 +1,7 @@
 import React from "react";
-import { UserType } from "Redux/usersReducer";
 import style from "./Users.module.css";
 import Cat from "./../../assets/cat.jpg";
-import { NavLink } from "react-router-dom";
-import Paginator from "components/Paginator/Paginator";
+import {NavLink} from "react-router-dom";
 
 export const User = ({
   user,
@@ -11,7 +9,7 @@ export const User = ({
   unfollow,
   followingInProgress,
 }: {
-  user: any;
+  user: any
   follow: (userId: number) => void;
   unfollow: (userId: number) => void;
   followingInProgress: Array<any>;

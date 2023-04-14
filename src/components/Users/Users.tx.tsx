@@ -12,6 +12,7 @@ const Users = ({
   currentPage,
   onPageChange,
   followingInProgress,
+  portionSize,
 }: {
   users: Array<UserType>;
   follow: (userId: number) => void;
@@ -21,6 +22,7 @@ const Users = ({
   currentPage: number;
   onPageChange: (page: number) => void;
   followingInProgress: Array<any>;
+  portionSize: number;
 }) => {
   return (
     <div>
@@ -31,8 +33,9 @@ const Users = ({
         follow={follow}
         unfollow={unfollow}
         followingInProgress={followingInProgress}
-        totalUsersCount={totalUsersCount}
+        totalItemsCount={totalUsersCount}
         pageSize={pageSize}
+        portionSize={portionSize}
       />
       <div>
         {users.map((u) => (

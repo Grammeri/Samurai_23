@@ -40,6 +40,7 @@ type mapDispatchToPropsType = {
   unfollow: (userId: number) => void;
   setPreloader: (isFetching: boolean) => void;
   toggleFollowingProgress: (Array: any, userId: number) => void;
+  portionSize: number;
 };
 
 //export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
@@ -70,6 +71,7 @@ export class UsersComponent extends React.Component<any> {
           follow={this.props.follow}
           unfollow={this.props.unfollow}
           followingInProgress={this.props.followingInProgress}
+          portionSize={this.props.portionSize}
         />
       </div>
     );

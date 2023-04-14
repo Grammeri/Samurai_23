@@ -7,6 +7,7 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_STATUS = "SET-STATUS";
 const DELETE_POST = "DELETE-POST";
+const SAVE_PHOTO_SUCCESS = "SAVE-PHOTO-SUCCESS"
 
 /*export type MessageType = {
   id: number;
@@ -96,6 +97,9 @@ export let profileReducer = (
         postsData: state.postsData.filter((f) => f.id != +action.postId),
       };
     }
+    case SAVE_PHOTO_SUCCESS: {
+      return { ...state, profile: {...state.profile, photos: action.photos}};
+    }
     default:
       return state;
   }
@@ -116,6 +120,10 @@ export const setStatus = (status: string) =>
 export type deletePostActionType = ReturnType<typeof deletePost>;
 export const deletePost = (postId: string) =>
   ({ type: DELETE_POST, postId } as const);
+
+export type savePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>;
+export const savePhotoSuccess = (photos: any) =>
+    ({ type: SAVE_PHOTO_SUCCESS, photos } as const);
 
 //Thunks
 export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
@@ -139,9 +147,18 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
   }
 };
 
+export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
+  const response = await profileAPI.savePhoto(file);
+  //debugger;
+  if (response.data.resultCode === 0) {
+    dispatch(savePhotoSuccess(response.data.data.photos));
+  }
+};
+
 export type ProfileReducerActionsTypes =
   | AddPostActionType
   | SendDialogMessageType
   | setUserProfileActionType
   | setStatusActionType
-  | deletePostActionType;
+  | deletePostActionType
+  | savePhotoSuccessActionType

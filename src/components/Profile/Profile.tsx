@@ -4,11 +4,12 @@ import style from "./Profile.module.css";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import { ProfileType } from "Redux/profileReducer";
 
-
 type ProfilePropsType = {
   profile: ProfileType | null;
-  updateStatus: (status:string)=>void;
+  updateStatus: (status: string) => void;
   status: string;
+  isOwner: boolean;
+  savePhoto:any
 };
 
 export const Profile = (props: ProfilePropsType) => {
@@ -19,6 +20,8 @@ export const Profile = (props: ProfilePropsType) => {
         profile={props.profile}
         status={props.status}
         updateStatus={props.updateStatus}
+        isOwner={props.isOwner}
+        savePhoto={props.savePhoto}
       />
       <MyPostsContainer
       //profilePage={props.profilePage}
