@@ -2,6 +2,7 @@ import { SendDialogMessageType } from "./dialogReducer";
 import { Dispatch } from "redux";
 import { profileAPI, usersAPI } from "api/api";
 import {RootReducerType} from "Redux/reduxStore";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "ADD-POST";
 /*const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";*/
@@ -163,6 +164,10 @@ export const saveProfile = (profile: ProfileType) => async (dispatch:any, getSta
 
   if (response.data.resultCode === 0) {
     dispatch(getProfile(userId));
+  } else {
+    dispatch(stopSubmit("edit-profile", { _error: response.data.messages[0] }));
+    return Promise.reject(response.data.messages[0])
+   /* dispatch(stopSubmit("edit-profile", { "contacts":{"facebook": response.data.messages[0] }}));*/
   }
 };
 

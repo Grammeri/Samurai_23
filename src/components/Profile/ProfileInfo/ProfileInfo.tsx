@@ -20,7 +20,7 @@ export const ProfileInfo = ({
     updateStatus: (status: string) => void;
     isOwner: boolean
     savePhoto: any
-    saveProfile:any
+    saveProfile: any
 }) => {
 
     const [editMode, setEditMode] = useState(false)
@@ -34,9 +34,12 @@ export const ProfileInfo = ({
                 savePhoto(e.target.files[0])
             }
     }
-    const onSubmit = (formData: any) => {
-       saveProfile(formData)
-        setEditMode(false)
+    const onSubmit =  (formData: any) => {
+      saveProfile(formData).then(()=>{
+          setEditMode(false)
+      })
+
+
     };
     //debugger
     // @ts-ignore

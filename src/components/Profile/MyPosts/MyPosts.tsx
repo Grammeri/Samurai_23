@@ -20,7 +20,7 @@ export type MyPostsType = {
 export const MyPosts = React.memo((props: MyPostsType) => {
   console.log("Render!");
   let postsElements = props.profilePage.postsData.map((el) => (
-    <Post message={el.message} likesCount={el.likesCount} />
+    <Post key={el.id} message={el.message} likesCount={el.likesCount} />
   ));
 
   let addNewPost = (values: any) => {
