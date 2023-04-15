@@ -1,6 +1,7 @@
 import { SendDialogMessageType } from "./dialogReducer";
 import { Dispatch } from "redux";
 import { profileAPI, usersAPI } from "api/api";
+import {RootReducerType} from "Redux/reduxStore";
 
 const ADD_POST = "ADD-POST";
 /*const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";*/
@@ -30,6 +31,7 @@ export type ProfileType = {
   lookingForAJob: boolean;
   lookingForAJobDescription: string;
   fullName: string;
+  aboutMe: string
   contacts: {
     github: string;
     vk: string;
@@ -152,6 +154,15 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
   //debugger;
   if (response.data.resultCode === 0) {
     dispatch(savePhotoSuccess(response.data.data.photos));
+  }
+};
+
+export const saveProfile = (profile: ProfileType) => async (dispatch:any, getState:any) => {
+  const userId = getState().auth.userId
+  const response = await profileAPI.saveProfile(profile);
+
+  if (response.data.resultCode === 0) {
+    dispatch(getProfile(userId));
   }
 };
 

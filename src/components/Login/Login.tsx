@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { createField, Input } from "components/FormsControls/FormsControls";
-import { maxLengthCreator, required } from "utils/validators/validators";
-import { connect } from "react-redux";
-import { login } from "Redux/authReducer";
+import React, {FC} from "react";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField, Input} from "components/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "Redux/authReducer";
 import styles from "../../components/FormsControls/FormsControls.module.css";
 
 export type FormDataType = {
@@ -63,11 +63,9 @@ const LoginReduxForm = reduxForm({
 })(LoginForm);
 
 const Login = (props: any) => {
-  console.log(props.login);
   const onSubmit = (formData: any) => {
     console.log(formData);
     props.login(formData.email, formData.password, formData.rememberMe);
-    //console.log(formData);
   };
   return (
     <div>

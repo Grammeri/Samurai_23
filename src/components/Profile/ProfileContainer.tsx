@@ -2,7 +2,7 @@ import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {RootReducerType} from "Redux/reduxStore";
-import {getProfile, getStatus, ProfileType, savePhoto, updateStatus,} from "Redux/profileReducer";
+import {getProfile, getStatus, ProfileType, savePhoto, saveProfile, updateStatus,} from "Redux/profileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -84,6 +84,6 @@ let mapStateToProps = (state: RootReducerType): MapStateToPropsType => ({
 });
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, { getProfile, getStatus, updateStatus, savePhoto }),
+  connect(mapStateToProps, { getProfile, getStatus, updateStatus, savePhoto, saveProfile }),
   withRouter
 )(ProfileContainer);

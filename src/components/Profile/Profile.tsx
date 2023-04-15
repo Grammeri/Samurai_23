@@ -22,6 +22,7 @@ export const Profile = (props: ProfilePropsType) => {
         updateStatus={props.updateStatus}
         isOwner={props.isOwner}
         savePhoto={props.savePhoto}
+        saveProfile={props.saveProfile}
       />
       <MyPostsContainer
       //profilePage={props.profilePage}
