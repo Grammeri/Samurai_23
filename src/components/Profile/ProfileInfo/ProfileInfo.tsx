@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from "react";
 import style from "./ProfileInfo.module.css";
-import Preloader from "../../Preloader/Preloader";
-import {ProfileType} from "../../../Redux/profileReducer";
+import Preloader from "components/Preloader/Preloader";
+import {ProfileType} from "Redux/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatusWithHooks";
-import Cat from "../../../assets/cat.jpg";
+import Cat from "assets/cat.jpg";
 import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm.";
 
 
@@ -15,7 +15,7 @@ export const ProfileInfo = ({
                                 savePhoto,
                                 saveProfile
                             }: {
-    profile: ProfileType | null;
+    profile: ProfileType;
     status: string;
     updateStatus: (status: string) => void;
     isOwner: boolean
@@ -34,15 +34,14 @@ export const ProfileInfo = ({
                 savePhoto(e.target.files[0])
             }
     }
-    const onSubmit =  (formData: any) => {
-      saveProfile(formData).then(()=>{
-          setEditMode(false)
-      })
+    const onSubmit = (formData: any) => {
+        saveProfile(formData).then(() => {
+            setEditMode(false)
+        })
 
 
     };
-    //debugger
-    // @ts-ignore
+
     return (
         <div className={style.profileInfo}>
             {/* <div>
@@ -50,7 +49,7 @@ export const ProfileInfo = ({
       </div>*/}
             <div className={style.description}>
                 <img
-                    src={profile.photos.large || Cat}
+                    src={profile.photos?.large || Cat}
                     alt={"photo"}
                     className={style.mainPhoto}
                 />
@@ -94,7 +93,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
             }
             {/*<b>About me{profile.aboutMe}</b>*/}
             <div>
-                <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
+                <b>Contacts</b>: {Object.keys(props.profile.contacts ||{}).map(key => {
                 return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
             })}
             </div>

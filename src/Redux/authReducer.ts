@@ -1,7 +1,7 @@
-import { Dispatch } from "redux";
-import { authAPI } from "api/api";
-import { stopSubmit } from "redux-form";
-import { AppThunk } from "Redux/reduxStore";
+import {Dispatch} from "redux";
+import {authAPI} from "api/api";
+import {stopSubmit} from "redux-form";
+import {AppThunk} from "Redux/reduxStore";
 
 const SET_USER_DATA = "samurai-network/auth/SET-USER-DATA";
 //const UNFOLLOW = "UNFOLLOW";

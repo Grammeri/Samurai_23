@@ -1,7 +1,6 @@
-import { usersAPI } from "api/api";
-import { Dispatch } from "redux";
-import { AppThunk } from "Redux/reduxStore";
-import { updateObjectInArray } from "utils/objectHelper";
+import {usersAPI} from "api/api";
+import {Dispatch} from "redux";
+import {updateObjectInArray} from "utils/objectHelper";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
@@ -14,6 +13,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS-FOLLOWING-PROGRESS";
 export type UserType = {
   id: number;
   name: string;
+  uniqueUrlName:string
   photos: {
     small: string;
     large: string;

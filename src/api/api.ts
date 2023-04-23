@@ -1,6 +1,4 @@
 import axios from "axios";
-import {Profiler} from "inspector";
-import Profile = module
 import {ProfileType} from "Redux/profileReducer";
 
 const instance = axios.create({
