@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Samurai_23/static/css/main.53466982.css",
-    "main.js": "/Samurai_23/static/js/main.be436e02.js",
+    "main.css": "/Samurai_23/static/css/main.e8fd6e84.css",
+    "main.js": "/Samurai_23/static/js/main.1969ca35.js",
     "static/media/Surrounded segments.gif": "/Samurai_23/static/media/Surrounded segments.1243d8097a4fac077e95.gif",
     "static/media/fox.jpg": "/Samurai_23/static/media/fox.ec57a3d2051c4eedeac0.jpg",
     "static/media/cat.jpg": "/Samurai_23/static/media/cat.59c95ba860af287eb2ca.jpg",
     "static/media/mysterious-gangster-character_23-2148473800.webp": "/Samurai_23/static/media/mysterious-gangster-character_23-2148473800.dba763692e0cf4573105.webp",
     "index.html": "/Samurai_23/index.html",
-    "main.53466982.css.map": "/Samurai_23/static/css/main.53466982.css.map",
-    "main.be436e02.js.map": "/Samurai_23/static/js/main.be436e02.js.map"
+    "main.e8fd6e84.css.map": "/Samurai_23/static/css/main.e8fd6e84.css.map",
+    "main.1969ca35.js.map": "/Samurai_23/static/js/main.1969ca35.js.map"
   },
   "entrypoints": [
-    "static/css/main.53466982.css",
-    "static/js/main.be436e02.js"
+    "static/css/main.e8fd6e84.css",
+    "static/js/main.1969ca35.js"
   ]
 }
