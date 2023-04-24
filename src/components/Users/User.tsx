@@ -18,7 +18,6 @@ export const User = ({
     <div>
       <span className={style.userPhoto}>
         <div>
-          {/* eslint-disable-next-line react/jsx-no-undef */}
           <NavLink to={"/profile/" + user.id}>
             <img src={user.photos.small != null ? user.photos.small : Cat} />
           </NavLink>
@@ -28,7 +27,6 @@ export const User = ({
             <button
               disabled={followingInProgress.some((id) => id === user.id)}
               onClick={() => {
-                //debugger
                 unfollow(user.id);
               }}
             >

@@ -91,7 +91,6 @@ const ProfileData = (props: ProfileDataPropsType) => {
                     <b>My professional skills</b> : {props.profile.lookingForAJobDescription}
                 </div>
             }
-            {/*<b>About me{profile.aboutMe}</b>*/}
             <div>
                 <b>Contacts</b>: {Object.keys(props.profile.contacts ||{}).map(key => {
                 return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>

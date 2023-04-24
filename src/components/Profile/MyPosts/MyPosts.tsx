@@ -12,13 +12,9 @@ import {
 export type MyPostsType = {
   profilePage: ProfilePageType;
   addNewPost: (message: string) => void;
-  //newPostText: string;
-  //onPostChangeHandler: (newPostText: string) => void;
-  //dispatch: (action: ActionsTypes) => void;
 };
 
 export const MyPosts = React.memo((props: MyPostsType) => {
-  console.log("Render!");
   let postsElements = props.profilePage.postsData.map((el) => (
     <Post key={el.id} message={el.message} likesCount={el.likesCount} />
   ));

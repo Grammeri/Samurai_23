@@ -13,7 +13,6 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & ProfilePropsType;
 
 type MapDispatchToPropsType = {
-    //setUserProfile: (profile: ProfileType) => void;
     getProfile: any;
     getStatus: any;
     updateStatus: (status: string) => void;
@@ -26,7 +25,6 @@ type MapStateToPropsType = {
     status: string;
     authorizedUserId: any;
     isAuth: any;
-    //isAuth: boolean;
 };
 
 type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType;
@@ -61,7 +59,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        /*if (this.props.isAuth) return <Redirect to={"/login"}/>*/
         return (
             <div>
                 <Profile

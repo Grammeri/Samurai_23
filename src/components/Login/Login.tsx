@@ -22,22 +22,9 @@ const LoginForm: FC<InjectedFormProps<{}>> = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit}>
       {createField("Email", "email", [required, maxLength50], Input, null)}
-      {/*        <Field
-          placeholder={"Email"}
-          component={Input}
-          name={"email"}
-          validate={[required]}
-        />*/}
       {createField("Password", "password", [required, maxLength50], Input, {
         type: "password",
       })}
-      {/*      <Field
-        placeholder={"Password"}
-        component={Input}
-        name={"password"}
-        validate={[required]}
-        type={"password"}
-      />*/}
       {createField(
         null,
         "remember Me",
@@ -48,8 +35,6 @@ const LoginForm: FC<InjectedFormProps<{}>> = ({ handleSubmit, error }) => {
         },
         "Remember me"
       )}
-      {/*      <Field type={"checkbox"} component={Input} name={"rememberMe"} />
-      Remember me*/}
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
@@ -64,7 +49,6 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props: any) => {
   const onSubmit = (formData: any) => {
-    console.log(formData);
     props.login(formData.email, formData.password, formData.rememberMe);
   };
   return (

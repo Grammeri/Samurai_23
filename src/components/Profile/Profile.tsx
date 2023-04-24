@@ -14,7 +14,6 @@ type ProfilePropsType = {
 };
 
 export const Profile = (props: ProfilePropsType) => {
-    //debugger;
     return (
         <div className={style.profile}>
             <ProfileInfo
@@ -26,10 +25,6 @@ export const Profile = (props: ProfilePropsType) => {
                 saveProfile={props.saveProfile}
             />
             <MyPostsContainer
-                //profilePage={props.profilePage}
-                //newPostText={props.profilePage.newPostText}
-                //dispatch={props.dispatch}
-                //store={props.store}
             />
         </div>
     );

@@ -15,7 +15,6 @@ export const usersAPI = {
   },
 
   getProfile(userId: number) {
-    console.log("Obsolete method. Use profileAPI object");
     return profileAPI.getProfile(userId);
   },
   deleteFollow(userId: number) {

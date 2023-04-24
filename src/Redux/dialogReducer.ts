@@ -1,4 +1,4 @@
-/*const UPDATE_NEW_DIALOG_MESSAGE = "UPDATE-NEW-DIALOG-MESSAGE";*/
+
 const SEND_DIALOG_MESSAGE = "SEND-DIALOG-MESSAGE";
 
 export type DialogType = {
@@ -34,7 +34,6 @@ export let initialState: InitialStateType = {
     { id: 5, message: "Yo" },
     { id: 6, message: "Yo" },
   ],
-  //newMessageText: "NewMessageText",
 };
 
 export const dialogsReducer = (

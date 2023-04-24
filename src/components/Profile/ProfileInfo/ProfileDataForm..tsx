@@ -4,11 +4,6 @@ import styles from "../../../components/FormsControls/FormsControls.module.css"
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {Contacts, ProfileType} from "Redux/profileReducer";
 
-/*export type ProfileDataFormType = {
-    profile: ProfileType
-    goToEditMode:any
-}*/
-
 type FormData = {
     fullName: string
     lookingForAJob:boolean
@@ -58,7 +53,6 @@ const ProfileDataForm = ({handleSubmit, profile, error}:AllProps) => {
                 Textarea)}
 
             <b>Contacts</b>: {Object.keys(profile?.contacts || {}).map(key => {
-            /*  return <Contacts key={key} contactTitle={key} contactValue={profile.contacts[key]}/>*/
             return <div key={key} className={styles.contact}>
                 <b>{key}: {createField(key,"contacts."+key, [], Input)}</b>
             </div>

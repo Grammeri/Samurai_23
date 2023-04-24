@@ -33,17 +33,13 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     prevState: Readonly<{}>,
     snapshot?: any
   ) {
-    //debugger;
     if (prevProps.status !== this.props.status)
       this.setState({
         status: this.props.status,
       });
-
-    console.log("componentDidUpdate");
   }
 
   render() {
-    console.log("render");
     return (
       <div>
         {!this.state.editMode && (

@@ -43,8 +43,6 @@ type mapDispatchToPropsType = {
   portionSize: number;
 };
 
-//export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
-
 export class UsersComponent extends React.Component<any> {
   componentDidMount() {
     const { currentPage, pageSize } = this.props;
@@ -60,7 +58,7 @@ export class UsersComponent extends React.Component<any> {
     return (
       <div>
         {this.props.isFetching ? (
-          <Preloader /*isFetching={this.props.isFetching}*/ />
+          <Preloader />
         ) : null}
         <Users
           totalUsersCount={this.props.totalUsersCount}

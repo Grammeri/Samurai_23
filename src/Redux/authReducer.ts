@@ -1,10 +1,8 @@
 import {Dispatch} from "redux";
 import {authAPI} from "api/api";
 import {stopSubmit} from "redux-form";
-import {AppThunk} from "Redux/reduxStore";
 
 const SET_USER_DATA = "samurai-network/auth/SET-USER-DATA";
-//const UNFOLLOW = "UNFOLLOW";
 
 type DataComponentsType = {
   userId: number | null;
@@ -70,7 +68,6 @@ export const getAuthUserData = () => async (dispatch: Dispatch) => {
 export const login =
   (email: string, password: string, rememberMe: boolean) =>
   async (dispatch: any) => {
-    //dispatch (stopSubmit("login", {_error: "Common Error!!!"}))
 
     let response = await authAPI.login(email, password, rememberMe);
 

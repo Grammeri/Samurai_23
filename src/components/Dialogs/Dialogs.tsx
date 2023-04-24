@@ -2,16 +2,14 @@ import React from "react";
 import style from "./Dialogs.module.css";
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {MessagePageType,} from "../../Redux/dialogReducer";
+import {MessagePageType,} from "Redux/dialogReducer";
 import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
 export type DialogsPropsType = {
-    // dispatch: (action: DialogsReducerActionsTypes) => void;
     dialogsPage: MessagePageType;
     updateDialogsTextAreaText: (text: string) => void;
     sendMessage: (values:string) => void;
     isAuth: boolean
-    // postsData: Array<PostType>;
 };
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -25,22 +23,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <Message key={m.id} message={m.message}/>
         )
     );
-    /*let newMessageDialogsPageText = props.dialogsPage.newMessageText;*/
-
-/*    let dialogBtnHandler = () => {
-        props.sendMessage();
-        //props.dispatch(SendDialogMessageActionCreator());
-    };*/
-
-/*    let dialogsTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newDialogsTextAreaText = e.target.value;
-        props.updateDialogsTextAreaText(newDialogsTextAreaText);
-        //props.dispatch(AddNewDialogMessageActionCreator(e.target.value));
-    };*/
-
-    /*  if(props.isAuth){
-        return <Redirect to={"/login"}/>
-      }*/
 
     let addNewMessage = (values: any) => {
         props.sendMessage(values.newMessageDialogsPageText)
@@ -55,24 +37,3 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
     );
 };
 
-/*type AddMessageFormType = {
-    handleSubmit: any
-}
-
-export const AddMessageForm = (props: AddMessageFormType) => {
-    return (
-        <form onSubmit={props.handleSubmit} className={style.messageTextarea}>
-            <Field placeholder={"Enter your message"} component={Textarea} name={"newMessageDialogsPageText"}
-                   validate={[required]}
-            />
-            <button className={style.messageButton}>
-                Send
-            </button>
-        </form>
-    )
-}
-
-const AddMessageFormRedux = reduxForm({
-    form: "dialogAddMessageForm"
-
-})(AddMessageForm)*/

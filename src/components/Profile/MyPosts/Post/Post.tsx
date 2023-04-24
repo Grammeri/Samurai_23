@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Post.module.css";
-import Fox from "./../../../../assets/fox.jpg";
+import Fox from "assets/fox.jpg";
 
 type PostPropsType = {
   message: string;

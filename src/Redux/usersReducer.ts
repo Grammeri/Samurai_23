@@ -51,12 +51,6 @@ export let usersReducer = (
         users: updateObjectInArray(state.users, action.userId, "id", {
           followed: true,
         }),
-        /*        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, followed: true };
-          }
-          return u;
-        }),*/
       };
     case UNFOLLOW:
       return {
@@ -64,12 +58,6 @@ export let usersReducer = (
         users: updateObjectInArray(state.users, action.userId, "id", {
           followed: false,
         }),
-        /*users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, followed: false };
-          }
-          return u;
-        }),*/
       };
     case SET_USERS: {
       return { ...state, users: [...action.users /*...state.users*/] }; //склеиваем 2 массива
@@ -148,7 +136,6 @@ export const requestUsers = (page: number, pageSize: number) => {
     dispatch(setCurrentPage(page));
 
     let data = await usersAPI.getUsers(page, pageSize);
-    //debugger
 
     dispatch(setPreloader(false));
     dispatch(setUsers(data.items));
@@ -173,22 +160,12 @@ const followUnfollowFlow = async (
 
 export const follow = (userId: number) => {
   return async (dispatch: Dispatch) => {
-    /*    let apiMethod = usersAPI.postFollow.bind(usersAPI);
-    let actionCreator = FollowSuccess;*/
     followUnfollowFlow(
       dispatch,
       userId,
       usersAPI.postFollow.bind(usersAPI),
       FollowSuccess
     );
-
-    /*    dispatch(toggleFollowingProgress(true, userId));
-        let response = await apiMethod(userId);
-        if (response.data.resultCode === 0) {
-          dispatch(actionCreator(userId));
-        }
-        dispatch(toggleFollowingProgress(false, userId));
-      };*/
   };
 };
 

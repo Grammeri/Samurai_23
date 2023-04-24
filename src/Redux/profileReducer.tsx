@@ -124,7 +124,6 @@ export const getProfile = (userId: number) => async (dispatch: Dispatch) => {
 
 export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileAPI.getStatus(userId);
-    //debugger;
     dispatch(setStatus(response.data));
 };
 
@@ -132,7 +131,6 @@ export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
 
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     const response = await profileAPI.updateStatus(status);
-    //debugger;
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
@@ -140,7 +138,6 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
 
 export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
     const response = await profileAPI.savePhoto(file);
-    //debugger;
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
@@ -155,7 +152,6 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: any, getSt
     } else {
         dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}));
         return Promise.reject(response.data.messages[0])
-        /* dispatch(stopSubmit("edit-profile", { "contacts":{"facebook": response.data.messages[0] }}));*/
     }
 };
 
