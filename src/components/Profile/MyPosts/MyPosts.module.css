@@ -9,14 +9,18 @@
 
 button {
   height: 35px;
-  background-color: darkgreen;
-  margin-left: 15px;
+  width: 90px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  background-color: steelblue;
   color: white;
+  border-radius: 20px;
 }
 h2 {
-  color: darkgreen;
+  color: black;
+  margin-bottom: 5px;
 }
 
 .textarea {
-  margin-bottom: 20px;
+
 }

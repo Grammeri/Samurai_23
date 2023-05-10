@@ -1,10 +1,12 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, MouseEventHandler, useState} from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "components/Preloader/Preloader";
 import {ProfileType} from "Redux/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatusWithHooks";
-import Cat from "assets/cat.jpg";
+import Person from "assets/person.jpg";
 import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm.";
+import Camera from "assets/camera.webp";
+
 
 
 export const ProfileInfo = ({
@@ -29,8 +31,7 @@ export const ProfileInfo = ({
         return <Preloader/>;
     }
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files)
-            if (e.target.files.length) {
+        if (e.target.files && e.target.files.length){
                 savePhoto(e.target.files[0])
             }
     }
@@ -48,37 +49,41 @@ export const ProfileInfo = ({
         <img src={Village} />
       </div>*/}
             <div className={style.description}>
-                <img
-                    src={profile.photos?.large || Cat}
-                    alt={"photo"}
-                    className={style.mainPhoto}
-                />
-                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
+                <div className={style.photo}>
+                    <img
+                        src={profile.photos?.large || Person}
+                        alt={"photo"}
+                        className={style.mainPhoto}
+                    />
+                </div>
 
+                {isOwner && <><input id="fileInput" style={{display: "none"}} type={"file"}
+                                     onChange={onMainPhotoSelected}/><label className={style.upLoadPhoto} htmlFor="fileInput">
+                  <img src={Camera}/>
+                </label></>}
 
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 {editMode
                     ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => {
                         setEditMode(true)
                     }} profile={profile} isOwner={isOwner}/>}
-
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )
 };
 
 type ProfileDataPropsType = {
-    goToEditMode: any
+    goToEditMode: MouseEventHandler<HTMLButtonElement> | undefined
     profile: any
     isOwner: boolean
 }
 
 const ProfileData = (props: ProfileDataPropsType) => {
     return (
-        <div>
+        <div className={style.personalInfo}>
             {props.isOwner && <div>
-                <button onClick={props.goToEditMode}>Edit</button>
+
             </div>}
             <div>
                 <b>Full name</b>: {props.profile.fullName}
@@ -91,10 +96,13 @@ const ProfileData = (props: ProfileDataPropsType) => {
                     <b>My professional skills</b> : {props.profile.lookingForAJobDescription}
                 </div>
             }
-            <div>
-                <b>Contacts</b>: {Object.keys(props.profile.contacts ||{}).map(key => {
-                return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
-            })}
+            <div className={style.contacts}>
+                <div className={style.contactsBlock}>
+                    <h3>Contacts:</h3> {Object.keys(props.profile.contacts ||{}).map(key => {
+                    return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+                })}
+                    <button onClick={props.goToEditMode}>Click to edit data</button>
+                </div>
             </div>
         </div>
     )
@@ -104,7 +112,7 @@ const ProfileData = (props: ProfileDataPropsType) => {
 export const Contacts = ({contactTitle, contactValue}: { contactTitle: string, contactValue: string }) => {
     return (
         <div className={style.contact}>
-            <b>{contactTitle}</b>:{contactValue}
+            <b>{contactTitle}</b>:<span className={style.contactValue}>{contactValue}</span>
         </div>
     )
 }

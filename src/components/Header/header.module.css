@@ -4,16 +4,18 @@
 }
 
 .header img {
-  width: 60px;
+  width: 80px;
 
-  margin: 25px;
-  border-radius: 35px;
+  margin: 15px;
+  border-radius: 45px;
 }
 
 .loginBlock {
+  margin-right: 40px;
+  margin-top: 5px;
   float: right;
 }
 
 .loginBlock a {
-  color: white;
+  color: black;
 }

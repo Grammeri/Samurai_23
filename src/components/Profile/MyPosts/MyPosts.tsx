@@ -1,13 +1,13 @@
 import React from "react";
 import { Post } from "./Post/Post";
 import style from "./MyPosts.module.css";
-import { ProfilePageType } from "../../../Redux/profileReducer";
+import { ProfilePageType } from "Redux/profileReducer";
 import { Field, reduxForm } from "redux-form";
-import { Textarea } from "../../../components/FormsControls/FormsControls";
+import { Textarea } from "components/FormsControls/FormsControls";
 import {
   maxLengthCreator,
   required,
-} from "../../../utils/validators/validators";
+} from "utils/validators/validators";
 
 export type MyPostsType = {
   profilePage: ProfilePageType;

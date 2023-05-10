@@ -5,7 +5,8 @@
 }
 
 .dialogsItems {
-  padding: 10px;
+  padding-left: 40px;
+  maring-top: 15px;
 }
 
 .dialogsItems .active {
@@ -20,14 +21,14 @@
 }
 
 .messageTextarea {
-  display: flex;
-  padding-right: 5px;
+  display: block;
+  padding-left: 15px;
 }
 
 .messageButton {
-  height: 55px;
+  height: 45px;
   width: 100px;
-  background-color: darkgreen;
+  background-color: steelblue;
   margin-left: 15px;
   color: white;
 }

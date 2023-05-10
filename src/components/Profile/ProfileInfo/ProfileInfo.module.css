@@ -1,12 +1,46 @@
 .description {
-  padding: 20px;
+    padding: 20px;
 }
 
 .description img {
-  width: 200px;
-  height: 200px;
+    width: 150px;
+    height: 150px;
 }
 
-.contact{
-  padding-left: 10px;
+.contact {
+    padding-left: 10px;
+}
+
+img {
+    border-radius: 100px;
+}
+
+.personalInfo{
+
+}
+.contactsBlock{
+    border-radius: 20px;
+    margin-top:30px;
+    border: 3px solid steelblue;
+    padding-top:15px;
+    padding-left:15px;
+    padding-right:15px;
+}
+.contactValue{
+    margin-left: 10px
+}
+h3{
+    margin-left:10px;
+    margin-bottom:10px
+}
+
+.icon-label:hover .icon {
+    color: #888;
+}
+
+.upLoadPhoto img{
+    width:40px;
+    height: 40px;
+    position:absolute;
+    margin-top:-50px;
 }

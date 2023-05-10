@@ -14,7 +14,7 @@
 
 .content {
   grid-area: content;
-  background-color: greenyellow;
+  background-color: lightgray;
   height:100%
 }
 

@@ -22,7 +22,7 @@ const ProfileDataForm = ({handleSubmit, profile, error}:AllProps) => {
     return (
 
         <form onSubmit={handleSubmit}>
-            <button>Save</button>
+            <button style={{"marginTop": "30px"}}>Save your changes</button>
             {error && <div className={styles.formSummaryError}>{error}</div>}
 
             <div>

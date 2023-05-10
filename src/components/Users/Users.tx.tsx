@@ -2,6 +2,7 @@ import React from "react";
 import { UserType } from "Redux/usersReducer";
 import Paginator from "components/Paginator/Paginator";
 import { User } from "components/Users/User";
+import styles from "./Users.module.css"
 
 const Users = ({
   users,
@@ -25,7 +26,7 @@ const Users = ({
   portionSize: number;
 }) => {
   return (
-    <div>
+    <div className={styles.usersBlock}>
       <Paginator
         currentPage={currentPage}
         onPageChange={onPageChange}

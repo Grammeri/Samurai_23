@@ -1,15 +1,15 @@
 .sideBar {
   grid-area: sideBar;
-  background-color: sandybrown;
+  background-color: lightgray;
   height: 100%;
   padding: 20px;
 }
 
 .item a {
-  color: white;
+  color: darkblue;
   text-decoration: none;
 }
 
 .item a.active {
-  color: gold;
+  color: firebrick ;
 }

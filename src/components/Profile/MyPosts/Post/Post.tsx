@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Post.module.css";
-import Fox from "assets/fox.jpg";
+import Girl from "assets/girl.jpg";
 
 type PostPropsType = {
   message: string;
@@ -11,7 +11,7 @@ export const Post = (props: PostPropsType) => {
   return (
     <div className={style.item}>
       <div>
-        <img src={Fox} />
+        <img src={Girl} />
         {props.message}
         <div>
           <span>like</span>
