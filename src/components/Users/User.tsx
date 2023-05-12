@@ -50,8 +50,6 @@ export const User = ({
           <div>{user.status}</div>
         </span>
         <span>
-          <div>{"Hard code: user.location.city"}</div>
-          <div>{"Hard code: user.location.country"}</div>
         </span>
       </span>
     </div>

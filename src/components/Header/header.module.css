@@ -19,3 +19,12 @@
 .loginBlock a {
   color: black;
 }
+
+.loginLink{
+  text-decoration: none;
+}
+
+h1{
+  margin-top: 20px;
+  color: white
+}
