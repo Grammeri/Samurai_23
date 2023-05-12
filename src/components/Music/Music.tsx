@@ -1,9 +1,10 @@
 import React from "react";
 import MusicBackground from "assets/music.jpg";
 import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
 
 
-export const Music = (props: any) => {
+const Music = (props: any) => {
 
     if (!props.isAuth) return <Redirect to={"/login"}/>
 
@@ -13,3 +14,4 @@ export const Music = (props: any) => {
 const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth
 });
+export default connect(mapStateToProps)(Music);

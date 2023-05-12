@@ -2,9 +2,7 @@ import React from "react";
 import "./App.css";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Route, withRouter } from "react-router-dom";
-import { Music } from "./components/Music/Music";
-import { News } from "./components/News/News";
-import { Settings } from "./components/Settings/Settings";
+
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -16,6 +14,9 @@ import { connect } from "react-redux";
 
 import Preloader from "components/Preloader/Preloader";
 import { RootReducerType } from "Redux/reduxStore";
+import Music from "components/Music/Music";
+import News from "components/News/News";
+import Settings from "components/Settings/Settings";
 
 class App extends React.Component<any> {
   componentDidMount() {
