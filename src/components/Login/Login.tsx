@@ -59,11 +59,12 @@ const LoginForm: FC<InjectedFormProps<{}>> = ({handleSubmit, error}) => {
                 <div>
                     <button>Login</button>
                     <div>
-                        <h1 style={{color:"black"}}>Welcome</h1>
-                        <img src={Welcome} style={{width: "400px", height: "200px"}} alt="welcome"/>
-                        {/*                        <h3>Please login with:</h3>
-                        <h3>free@samuraijs.com</h3>
-                        <h3>Password: free</h3>*/}
+                        <h4>Please login with:</h4>
+                        <h4>free@samuraijs.com</h4>
+                        <h4>Password: free</h4>
+                        {/*<h1 style={{color: "black"}}>Welcome</h1>*/}
+                        <img src={Welcome} style={{width: "400px", height: "200px", marginTop:"20px"}} alt="welcome"/>
+
                     </div>
                 </div>
             </form>
