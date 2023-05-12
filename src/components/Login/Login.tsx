@@ -60,9 +60,9 @@ const LoginForm: FC<InjectedFormProps<{}>> = ({handleSubmit, error}) => {
                 <div>
                     <button>Login</button>
                     <div>
-                        <h4>Please login with:</h4>
+{/*                        <h4>Please login with:</h4>
                         <h4>free@samuraijs.com</h4>
-                        <h4>Password: free</h4>
+                        <h4>Password: free</h4>*/}
                         {/*<h1 style={{color: "black"}}>Welcome</h1>*/}
                         <img src={Welcome} style={{width: "400px", height: "200px", marginTop:"20px"}} alt="welcome"/>
 

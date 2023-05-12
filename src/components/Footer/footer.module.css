@@ -1,0 +1,10 @@
+.footerContainer{
+    grid-area: footer;
+    background: steelblue;
+    display:flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 10px
+
+}
+

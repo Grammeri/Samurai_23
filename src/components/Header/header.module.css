@@ -1,5 +1,8 @@
 .header {
   grid-area: header;
+  display:flex;
+  justify-content: space-around;
+  align-items: start;
   background-color: steelblue;
 }
 
@@ -11,8 +14,6 @@
 }
 
 .loginBlock {
-  margin-right: 40px;
-  margin-top: 5px;
   float: right;
   color:steelblue;
 }

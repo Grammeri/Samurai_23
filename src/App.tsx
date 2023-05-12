@@ -17,6 +17,7 @@ import { RootReducerType } from "Redux/reduxStore";
 import Music from "components/Music/Music";
 import News from "components/News/News";
 import Settings from "components/Settings/Settings";
+import {Footer} from "components/Footer/Footer";
 
 class App extends React.Component<any> {
   componentDidMount() {
@@ -39,6 +40,7 @@ class App extends React.Component<any> {
           <NavBar />
           {/*<NavBar state={state}/>*/}
         </div>
+        <Footer/>
 
         <div className={"content"}>
           <Route path="/dialogs" render={dialogComponent} />
