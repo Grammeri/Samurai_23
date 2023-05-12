@@ -22,6 +22,7 @@ export type FormDataType = {
 const maxLength50 = maxLengthCreator(50);
 
 const LoginForm: FC<InjectedFormProps<{}>> = ({handleSubmit, error}) => {
+
     return (
         <div className={styles.logginBlock}>
 
@@ -78,7 +79,8 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props: any) => {
     const onSubmit = (formData: any) => {
-        props.login(formData.email, formData.password, formData.rememberMe);
+        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe); //login - callback !={login below}
     };
 
     /*    if (props.isAuth) {
@@ -99,4 +101,4 @@ const Login = (props: any) => {
 const mapStateToProps = (state: any) => ({
     isAuth: state.auth.isAuth, // assuming that you have an "isAuth" property in your auth state
 });
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, {login})(Login); //{login} - thunkCreator

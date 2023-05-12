@@ -40,7 +40,6 @@ export let authReducer = (
       return <InitialStateType>{
         ...state,
         ...action.payload,
-        isAuth: true,
       };
     default:
       return state;

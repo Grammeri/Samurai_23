@@ -16,4 +16,5 @@ const mapStateToProps = (state: RootReducerType): any => ({
   profile: state.profilePage.profile,
 });
 
-export default connect(mapStateToProps, { logout })(HeaderContainer);
+
+export default connect(mapStateToProps, { logout })(HeaderContainer); //{logout} - thunkCreator

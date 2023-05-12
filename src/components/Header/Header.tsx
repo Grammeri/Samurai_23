@@ -8,7 +8,8 @@ export const Header = (props: any) => {
     <div className={style.header}>
       <img src={ReactIcon} />
       <div className={style.loginBlock}>
-          {props.isAuth ? props.login
+          {props.isAuth
+              ?<div>{props.login} - <h1 onClick={props.logout}>Log out</h1></div>
         : <NavLink to={"/login"} className={style.loginLink}><h1>Login</h1></NavLink>}
       </div>
     </div>
