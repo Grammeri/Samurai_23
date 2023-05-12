@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.css": "/Samurai_23/static/css/main.bdebee50.css",
-    "main.js": "/Samurai_23/static/js/main.888a9b0c.js",
+    "main.css": "/Samurai_23/static/css/main.d047a22f.css",
+    "main.js": "/Samurai_23/static/js/main.6f25a449.js",
     "static/media/camera.webp": "/Samurai_23/static/media/camera.28f0f9b81bd222816c76.webp",
     "static/media/Surrounded segments.gif": "/Samurai_23/static/media/Surrounded segments.1243d8097a4fac077e95.gif",
+    "static/media/news.jpg": "/Samurai_23/static/media/news.6f93ed10a6b206422ecf.jpg",
+    "static/media/music.jpg": "/Samurai_23/static/media/music.2c4f180f453248465524.jpg",
+    "static/media/settings.jpg": "/Samurai_23/static/media/settings.7637b0d963493f283fa8.jpg",
+    "static/media/wellcome.jpg": "/Samurai_23/static/media/wellcome.8558c6a7287e9686a3c6.jpg",
     "index.html": "/Samurai_23/index.html",
-    "main.bdebee50.css.map": "/Samurai_23/static/css/main.bdebee50.css.map",
-    "main.888a9b0c.js.map": "/Samurai_23/static/js/main.888a9b0c.js.map"
+    "main.d047a22f.css.map": "/Samurai_23/static/css/main.d047a22f.css.map",
+    "main.6f25a449.js.map": "/Samurai_23/static/js/main.6f25a449.js.map"
   },
   "entrypoints": [
-    "static/css/main.bdebee50.css",
-    "static/js/main.888a9b0c.js"
+    "static/css/main.d047a22f.css",
+    "static/js/main.6f25a449.js"
   ]
 }
