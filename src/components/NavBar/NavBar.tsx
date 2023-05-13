@@ -24,7 +24,7 @@ export const NavBar = (props: NavBarPropsType) => {
       </div>
       <div className={style.item}>
         <NavLink to={"/news"} activeClassName={style.active}>
-          News
+          Sport News
         </NavLink>
       </div>
       <div className={style.item}>
