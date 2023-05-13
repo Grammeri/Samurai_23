@@ -88,11 +88,15 @@ const Login = (props: any) => {
         }*/
     if (props.isAuth) return <Redirect to={"/profile"}/>
 
+    const initialValues = {
+        email:"free@samuraijs.com",
+        password:"free"
+    }
 
     return (
         <div>
             {/*<h1 style={{marginLeft:"70px"}}>Login</h1>*/}
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} initialValues={initialValues}/>
 
         </div>
     );
