@@ -1,36 +1,47 @@
 .header {
   grid-area: header;
-  display:flex;
+ /* display:flex;
   justify-content: space-around;
-  align-items: start;
+  align-items: start;*/
   background-color: steelblue;
 }
 
 .header img {
   width: 80px;
-
   margin: 15px;
   border-radius: 45px;
 }
 
 .loginBlock {
   float: right;
+  position: absolute;
+  top: 30px;
+  right: 50px;
   color:steelblue;
-}
-
-.loginBlock a {
-  color: black;
 }
 
 .loginLink{
   text-decoration: none;
 }
 
-h1{
-  margin-top: 20px;
-  color: white
+.loginLink h1{
+  color: black
 }
 
 button {
-  margin-top:31px
+  margin-top:10px
+}
+
+.iconReact{
+  display:flex;
+  margin-left:20px
+}
+
+.iconReact h1{
+  margin-top: 30px;
+  margin-left: 20px
+}
+
+.loggedIn button{
+  margin-bottm: 50px
 }
