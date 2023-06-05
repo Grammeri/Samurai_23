@@ -1,6 +1,7 @@
-This is a straightforward social networking application. With it, users can view all registered members, and have the ability to add or remove them from their friend list. In addition, users have the capability to update their status, as well as add and remove posts. This was one of my initial applications built using React in conjunction with TypeScript. For this application, I utilized class components, which provided a solid foundation for understanding and working with React.
-Below is a list of libraries used in this project
+This is a social networking application that allows users to perform various actions such as viewing registered members, adding or removing friends, updating their status, and adding/removing posts. The application was built using React and TypeScript, with class components being utilized for building and managing the application's functionality.
+Server: https://social-network.samuraijs.com/
 
+Below is a list of libraries used in this project
 - **antd** 
 - **axios** 
 - **classnames**
@@ -20,4 +21,5 @@ Below is a list of libraries used in this project
 - **typescript** 
 - **uuid** and **@types/uuid**
 
-
+Это приложение социальной сети, которое позволяет пользователям выполнять различные действия, такие как просмотр зарегистрированных участников, добавление или удаление друзей, обновление своего статуса и добавление/удаление постов. Приложение было создано с использованием React и TypeScript, причем для построения и управления функциональностью приложения использовались классовые компоненты.
+Сервер: https://social-network.samuraijs.com/
