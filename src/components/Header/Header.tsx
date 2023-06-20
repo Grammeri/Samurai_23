@@ -1,5 +1,5 @@
 import React from "react";
-import ReactIcon from "../../assets/react.jpg";
+import ReactIcon from "../../assets/React.jpg";
 import style from "./header.module.css";
 import { NavLink } from "react-router-dom";
 
