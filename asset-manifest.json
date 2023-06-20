@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Samurai_23/static/css/main.cf687649.css",
-    "main.js": "/Samurai_23/static/js/main.f9dfe28a.js",
-    "static/media/camera.webp": "/Samurai_23/static/media/camera.28f0f9b81bd222816c76.webp",
+    "main.css": "/Samurai_23/static/css/main.f3c81bdf.css",
+    "main.js": "/Samurai_23/static/js/main.46c7f319.js",
     "static/media/Surrounded segments.gif": "/Samurai_23/static/media/Surrounded segments.1243d8097a4fac077e95.gif",
-    "static/media/settings.jpg": "/Samurai_23/static/media/settings.7637b0d963493f283fa8.jpg",
-    "static/media/wellcome.jpg": "/Samurai_23/static/media/wellcome.8558c6a7287e9686a3c6.jpg",
+    "static/media/React.jpg": "/Samurai_23/static/media/React.eb0a0b7112c9de12e667.jpg",
+    "static/media/person.jpg": "/Samurai_23/static/media/person.74ac6c863e597e4a4ad5.jpg",
+    "static/media/wellcome.jpg": "/Samurai_23/static/media/wellcome.3084701e3e1207f81bb2.jpg",
     "index.html": "/Samurai_23/index.html",
-    "main.cf687649.css.map": "/Samurai_23/static/css/main.cf687649.css.map",
-    "main.f9dfe28a.js.map": "/Samurai_23/static/js/main.f9dfe28a.js.map"
+    "main.f3c81bdf.css.map": "/Samurai_23/static/css/main.f3c81bdf.css.map",
+    "main.46c7f319.js.map": "/Samurai_23/static/js/main.46c7f319.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf687649.css",
-    "static/js/main.f9dfe28a.js"
+    "static/css/main.f3c81bdf.css",
+    "static/js/main.46c7f319.js"
   ]
 }
