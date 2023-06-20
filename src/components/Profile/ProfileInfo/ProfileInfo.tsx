@@ -5,7 +5,7 @@ import {ProfileType} from "Redux/profileReducer";
 import ProfileStatusWithHooks from "components/Profile/ProfileInfo/ProfileStatusWithHooks";
 import Person from "assets/person.jpg";
 import ProfileDataForm from "components/Profile/ProfileInfo/ProfileDataForm.";
-import Camera from "assets/camera.webp";
+import Camera from "assets/camera.jpg";
 
 
 

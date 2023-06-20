@@ -28,43 +28,46 @@ const LoginForm: FC<InjectedFormProps<{}>> = ({handleSubmit, error}) => {
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Email</label>
-                    {createField("Email",
-                        "email",
-                        [required, maxLength50],
-                        Input, null)}
-                </div>
-                <div>
-                    <label>Password</label>
-                    <div className={styles.formSize}>
-                        {createField("Password", "password", [required, maxLength50], Input, {
-                            type: "password"
-                        })}
+                    <div className={styles.loginForm}>
+                        <label>Email</label>
+                        {createField("Email",
+                            "email",
+                            [required, maxLength50],
+                            Input, null)}
                     </div>
-                </div>
-                <div>
-                    <label style={{marginTop: "40px"}}>Remember me</label>
-                    {createField(
-                        null,
-                        "remember Me",
-                        null,
-                        Input,
-                        {
-                            type: "checkbox",
-                        },
-                    )}
-
-                </div>
-
-                {error && <div className={styles.formSummaryError}>{error}</div>}
-                <div>
-                    <button>Login</button>
                     <div>
-{/*                        <h4>Please login with:</h4>
+                        <label>Password</label>
+                        <div className={styles.formSize}>
+                            {createField("Password", "password", [required, maxLength50], Input, {
+                                type: "password"
+                            })}
+                        </div>
+                    </div>
+                    <div>
+                        <label style={{marginTop: "40px"}}>Remember me</label>
+                        {createField(
+                            null,
+                            "remember Me",
+                            null,
+                            Input,
+                            {
+                                type: "checkbox",
+                            },
+                        )}
+
+                    </div>
+
+                    {error && <div className={styles.formSummaryError}>{error}</div>}
+                    <div>
+                        <button>Login</button>
+                    </div>
+                    <div>
+                        {/*                        <h4>Please login with:</h4>
                         <h4>free@samuraijs.com</h4>
                         <h4>Password: free</h4>*/}
                         {/*<h1 style={{color: "black"}}>Welcome</h1>*/}
-                        <img src={Welcome} style={{width: "400px", height: "200px", marginTop:"20px"}} alt="welcome"/>
+                        <img src={Welcome} style={{width: "400px", height: "200px", marginBottom: "25px"}}
+                             alt="welcome"/>
 
                     </div>
                 </div>
@@ -88,11 +91,15 @@ const Login = (props: any) => {
         }*/
     if (props.isAuth) return <Redirect to={"/profile"}/>
 
+    const initialValues = {
+        email: "free@samuraijs.com",
+        password: "free"
+    }
 
     return (
         <div>
             {/*<h1 style={{marginLeft:"70px"}}>Login</h1>*/}
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} initialValues={initialValues}/>
 
         </div>
     );
