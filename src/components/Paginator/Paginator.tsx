@@ -15,16 +15,16 @@ export type UsersPropsType = {
 };
 
 let Paginator = ({
-  follow,
-  unfollow,
-  users,
-  followingInProgress,
-  totalItemsCount,
-  pageSize,
-  currentPage,
-  onPageChange,
-  portionSize = 10,
-}: {
+                   follow,
+                   unfollow,
+                   users,
+                   followingInProgress,
+                   totalItemsCount,
+                   pageSize,
+                   currentPage,
+                   onPageChange,
+                   portionSize = 10,
+                 }: {
   totalItemsCount: number;
   pageSize: number;
   portionSize: number;
@@ -48,52 +48,54 @@ let Paginator = ({
   let rightPortionPageNumber = portionNumber * portionSize;
 
   return (
-    <div>
       <div className={styles.paginator}>
         {portionNumber > 1 && (
-          <button
-            onClick={() => {
-              setPortionNumber(portionNumber - 1);
-            }}
-          >
-            PREV
-          </button>
+            // Replaced button text with Unicode arrow
+            <button
+                className={styles.arrowButton}
+                onClick={() => {
+                  setPortionNumber(portionNumber - 1);
+                }}
+            >
+              &laquo;
+            </button>
         )}
 
         {pages
-          .filter(
-            (p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber
-          )
-          .map((p) => {
-            return (
-              <span
-                className={cn(
-                  {
-                    [styles.selectedPage]: currentPage === p,
-                  },
-                  styles.pageNumber
-                )}
-                key={p}
-                onClick={(e) => {
-                  onPageChange(p);
-                }}
-              >
-                {p}
-              </span>
-            );
-          })}
+            .filter(
+                (p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber
+            )
+            .map((p) => {
+              return (
+                  <span
+                      className={cn(
+                          {
+                            [styles.selectedPage]: currentPage === p,
+                          },
+                          styles.pageNumber
+                      )}
+                      key={p}
+                      onClick={(e) => {
+                        onPageChange(p);
+                      }}
+                  >
+              {p}
+            </span>
+              );
+            })}
 
         {portionCount > portionNumber && (
-          <button
-            onClick={() => {
-              setPortionNumber(portionNumber + 1);
-            }}
-          >
-            NEXT
-          </button>
+            // Replaced button text with Unicode arrow
+            <button
+                className={styles.arrowButton}
+                onClick={() => {
+                  setPortionNumber(portionNumber + 1);
+                }}
+            >
+              &raquo;
+            </button>
         )}
       </div>
-    </div>
   );
 };
 

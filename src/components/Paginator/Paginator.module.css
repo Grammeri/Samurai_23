@@ -1,16 +1,39 @@
 .paginator {
+  display: flex; /* added flex layout for the container */
+  justify-content: center; /* center items horizontally */
+  align-items: center; /* center items vertically */
   margin: 10px;
   overflow-inline: auto;
 }
+
 .pageNumber {
-  padding: 2px;
+  padding: 10px; /* increased padding */
+  margin: 0 5px; /* added horizontal margin */
   border: 1px solid grey;
+  border-radius: 5px; /* added border radius */
+  cursor: pointer; /* added pointer cursor */
+  transition: background-color 0.3s ease; /* added transition for hover effect */
+}
+
+.pageNumber:hover {
+  background-color: #ddd; /* added hover effect */
 }
 
 .pageNumber.selectedPage {
   font-weight: bold;
   border-color: black;
+  background-color: #ddd; /* added background color to selected page */
 }
-button {
-  margin:20px
+
+.arrowButton {
+  margin: 0 20px; /* adjusted margin */
+  background: none; /* removed default button background */
+  border: none; /* removed default button border */
+  cursor: pointer; /* added pointer cursor */
+  font-size: 1.5em; /* increased arrow size */
+  transition: color 0.3s ease; /* added transition for hover effect */
+}
+
+.arrowButton:hover {
+  color: grey; /* added hover effect */
 }
