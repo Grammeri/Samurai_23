@@ -22,6 +22,7 @@ import {
   getUsers,
 } from "Redux/usersSelectors";
 import { RootReducerType } from "Redux/reduxStore";
+import styles from "./UsersContainer.module.css";
 
 type MapStateToPropsType = {
   totalUsersCount: number;
@@ -71,16 +72,17 @@ export class UsersComponent extends React.Component<any> {
     return (
         <div>
           {/* 5. Add a switch (radio buttons) for selecting the page type. */}
-          <div>
-            <label>
-              <input type="radio" value="all" checked={!this.state.isFriendsPage} onChange={this.onTogglePageType} />
-              All Users
+
+          {/*<div className={styles.radioGroup}>
+            <label className={styles.radioLabel}>
+              <input type="radio" value="all" checked={!this.state.isFriendsPage} onChange={this.onTogglePageType} className={styles.radioInput}/>
+              <h2>All Users</h2>
             </label>
-            <label>
-              <input type="radio" value="friends" checked={this.state.isFriendsPage} onChange={this.onTogglePageType} />
-              My Friends
+            <label className={styles.radioLabel}>
+              <input type="radio" value="friends" checked={this.state.isFriendsPage} onChange={this.onTogglePageType} className={styles.radioInput} />
+              <h2>My Friends</h2>
             </label>
-          </div>
+          </div>*/}
           {this.props.isFetching ? (
               <Preloader />
           ) : null}
@@ -94,6 +96,8 @@ export class UsersComponent extends React.Component<any> {
               unfollow={this.props.unfollow}
               followingInProgress={this.props.followingInProgress}
               portionSize={this.props.portionSize}
+              isFriendsPage={this.state.isFriendsPage} // Pass new props here
+              onTogglePageType={this.onTogglePageType} // And here
           />
         </div>
     );

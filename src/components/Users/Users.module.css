@@ -1,3 +1,5 @@
+/* Users.module.css */
+
 .userPhoto img {
   margin: 15px;
   width: 100px;
@@ -6,4 +8,36 @@
 
 .usersBlock {
   padding-left: 100px
+}
+
+/* New class for user container */
+.userContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Distribute users evenly */
+}
+
+/* Style each user to take 20% of the width. */
+.user {
+  flex-basis: 16%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+/* New class for controls */
+.controls {
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-bottom: 20px;
+}
+
+.radioGroup {
+  margin-right: 10px;
+}
+
+.radioButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -1,0 +1,15 @@
+.radioGroup {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center; /* Spread out the radio buttons evenly */
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  flex-direction: column; /* Stack the elements on top of each other */
+}
+
+.radioInput {
+  margin-bottom: 10px; /* Create some space between the radio button and the label */
+}
