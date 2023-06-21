@@ -130,18 +130,19 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) =>
     userId,
   } as const);
 
-export const requestUsers = (page: number, pageSize: number) => {
+export const requestUsers = (page: number, pageSize: number, isFriendsPage: boolean) => {
   return async (dispatch: Dispatch) => {
     dispatch(setPreloader(true));
     dispatch(setCurrentPage(page));
 
-    let data = await usersAPI.getUsers(page, pageSize);
+    let data = await usersAPI.getUsers(page, pageSize, isFriendsPage);
 
     dispatch(setPreloader(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));
   };
 };
+
 
 const followUnfollowFlow = async (
   dispatch: Dispatch,

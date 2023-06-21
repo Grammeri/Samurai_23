@@ -44,34 +44,58 @@ type mapDispatchToPropsType = {
 };
 
 export class UsersComponent extends React.Component<any> {
+  // 1. Add a new state variable for the currently selected page type.
+  state = {
+    isFriendsPage: false,
+  };
   componentDidMount() {
     const { currentPage, pageSize } = this.props;
-    this.props.getUsers(currentPage, pageSize);
+    // 2. Use the new state variable as an argument when requesting users.
+    this.props.getUsers(currentPage, pageSize, this.state.isFriendsPage);
   }
 
   onPageChange = (pageNumber: number) => {
     const { pageSize } = this.props;
-    this.props.getUsers(pageNumber, pageSize);
+    // 3. Use the new state variable as an argument when requesting users.
+    this.props.getUsers(pageNumber, pageSize, this.state.isFriendsPage);
   };
 
+  // 4. Add a new method for handling changes to the page type switch.
+  onTogglePageType = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isFriendsPage = event.currentTarget.value === "friends";
+    this.setState({ isFriendsPage });
+    const { currentPage, pageSize } = this.props;
+    this.props.getUsers(currentPage, pageSize, isFriendsPage);
+  };
   render() {
     return (
-      <div>
-        {this.props.isFetching ? (
-          <Preloader />
-        ) : null}
-        <Users
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          onPageChange={this.onPageChange}
-          users={this.props.users}
-          follow={this.props.follow}
-          unfollow={this.props.unfollow}
-          followingInProgress={this.props.followingInProgress}
-          portionSize={this.props.portionSize}
-        />
-      </div>
+        <div>
+          {/* 5. Add a switch (radio buttons) for selecting the page type. */}
+          <div>
+            <label>
+              <input type="radio" value="all" checked={!this.state.isFriendsPage} onChange={this.onTogglePageType} />
+              All Users
+            </label>
+            <label>
+              <input type="radio" value="friends" checked={this.state.isFriendsPage} onChange={this.onTogglePageType} />
+              My Friends
+            </label>
+          </div>
+          {this.props.isFetching ? (
+              <Preloader />
+          ) : null}
+          <Users
+              totalUsersCount={this.props.totalUsersCount}
+              pageSize={this.props.pageSize}
+              currentPage={this.props.currentPage}
+              onPageChange={this.onPageChange}
+              users={this.props.users}
+              follow={this.props.follow}
+              unfollow={this.props.unfollow}
+              followingInProgress={this.props.followingInProgress}
+              portionSize={this.props.portionSize}
+          />
+        </div>
     );
   }
 }
@@ -88,12 +112,12 @@ let mapStateToProps = (state: RootReducerType) => {
 };
 
 export default compose<React.ComponentType>(
-  withAuthRedirect,
-  connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers: requestUsers,
-  })
+    withAuthRedirect,
+    connect(mapStateToProps, {
+      follow,
+      unfollow,
+      setCurrentPage,
+      toggleFollowingProgress,
+      getUsers: requestUsers, // Make sure your requestUsers function is updated to take the isFriendsPage parameter
+    })
 )(UsersComponent);
